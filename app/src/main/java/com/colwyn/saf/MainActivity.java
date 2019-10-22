@@ -12,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, LogIn.class));
     }
 
+    public void scrollingLink(View view){
+        startActivity(new Intent(MainActivity.this, ScrollingActivity.class));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
