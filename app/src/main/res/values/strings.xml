@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SAF</string>
+    <string name="spark_air_fuel"><![CDATA[Spark Air & Fuel]]></string>
 </resources>
