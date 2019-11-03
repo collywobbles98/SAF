@@ -32,13 +32,16 @@ public class MainActivity extends AppCompatActivity {
     public void getuserid(View view){
         Toast.makeText(MainActivity.this, userId + " ", Toast.LENGTH_SHORT).show();
         useridTextView = findViewById(R.id.userIdTextView);
-        useridTextView.setText(userId + " ");
+        useridTextView.setText(userData.userID_Global);
     }
 
 
 
-    public void profileClicked(View view){
-        startActivity(new Intent(MainActivity.this, LogIn.class));
+    public void goToProfile(View view){
+
+        userData.userID_Global = user.getUid();
+
+        startActivity(new Intent(MainActivity.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
     public void scrollingLink(View view){
@@ -77,5 +80,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        userData.userID_Global = user.getUid();
     }
 }

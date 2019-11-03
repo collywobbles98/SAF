@@ -6,115 +6,129 @@
     android:layout_height="match_parent"
     tools:context=".Profile">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar2"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:background="#FFFFFF"
+        android:layout_height="60dp"
+        android:background="#424C55"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/spark_air_fuel"
+        android:text="@string/profile_title"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#058ED9"
+        android:textColor="#F6F7EB"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="0dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="10dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="92dp"
+        android:background="#456990"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/profileImageView"
+        android:layout_width="144dp"
+        android:layout_height="137dp"
+        android:layout_marginTop="20dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#FFFFFF"
+        android:foregroundTint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
+        tools:srcCompat="@drawable/person_24dp" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="55dp"
+        android:background="#FF5A5F"
+        android:orientation="horizontal"
+        android:weightSum="5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton8"
+            android:id="@+id/homeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/search_24dp" />
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            android:onClick="goToHome"
+            app:srcCompat="@drawable/home_white" />
 
         <ImageButton
-            android:id="@+id/imageButton7"
+            android:id="@+id/sellButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/browse_24dp" />
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            app:srcCompat="@drawable/add_box_white" />
 
         <ImageButton
-            android:id="@+id/imageButton3"
+            android:id="@+id/basketButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/sell_24dp" />
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            app:srcCompat="@drawable/shopping_cart_white" />
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/notificationsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/basket_24dp" />
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            app:srcCompat="@drawable/notifications_white" />
 
         <ImageButton
-            android:id="@+id/imageButton9"
+            android:id="@+id/profileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/chat_24dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="20dp"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/notifications_24dp" />
-
-        <ImageButton
-            android:id="@+id/imageButton6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#FFFFFF"
-            app:srcCompat="@drawable/person_current_24dp" />
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            android:tint="#393E41"
+            app:srcCompat="@drawable/account_box_white" />
 
     </LinearLayout>
 
-    <ImageButton
-        android:id="@+id/imageButton10"
+    <TextView
+        android:id="@+id/usernameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="10dp"
-        android:background="#FFFFFF"
+        android:layout_marginTop="5dp"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/more_vert_24dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="104dp"
+        android:onClick="testclicked"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

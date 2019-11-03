@@ -21,6 +21,7 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:background="#424C55"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:layout_constraintTop_toTopOf="parent"
@@ -30,25 +31,15 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
         android:text="@string/spark_air_fuel"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="#FF5A5F"
+        android:textColor="#F6F7EB"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/imageButton10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButton10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/more_vert_24dp" />
 
     <EditText
         android:id="@+id/editText2"
@@ -105,15 +96,16 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/homeButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
+            android:tint="#393E41"
             app:srcCompat="@drawable/home_white" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/sellButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -121,7 +113,7 @@
             app:srcCompat="@drawable/add_box_white" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/basketButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -129,7 +121,7 @@
             app:srcCompat="@drawable/shopping_cart_white" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/notificationsButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -137,11 +129,12 @@
             app:srcCompat="@drawable/notifications_white" />
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/profileButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
+            android:onClick="goToProfile"
             app:srcCompat="@drawable/account_box_white" />
 
     </LinearLayout>
