@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
         String messageText = (editText2.getText().toString().trim());
 
-        // Create a new user with a first and last name
         Map<String, Object> Message = new HashMap<>();
         Message.put("Message", messageText);
 
@@ -82,5 +81,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userData.userID_Global = user.getUid();
+
+        //If no user is logged in, take user to login activity.
+        if (userData.userID_Global == null){
+            startActivity(new Intent(MainActivity.this, LogIn.class));
+        }
+
+
     }
 }

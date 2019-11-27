@@ -19,13 +19,14 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Profile" />
         <activity android:name=".Register" />
-        <activity android:name=".LogIn" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".LogIn">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity">
         </activity>
     </application>
 

@@ -42,56 +42,81 @@ public class LogIn extends AppCompatActivity {
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        btnLogIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Get Values
-                String email = txtEmail.getText().toString().trim();
-                String password = txtPassword.getText().toString().trim();
+        //Try to check if there is a user session running
+        try {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            userData.userID_Global = user.getUid();
+        }
+        catch(Exception e) {
 
-                //Check Form has been Filled in
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(LogIn.this, "Please enter an email address.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(LogIn.this, "Please enter a password.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+            //No Current Firebase User, Let user sign in.
+        }
 
-                //Check Password Length (>8)
-                if(password.length() < 8) {
-                    Toast.makeText(LogIn.this, "Passwords must be at least 8 characters.", Toast.LENGTH_SHORT).show();
-                }
 
-                //Sign in existing users
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LogIn.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    //Log.d(TAG, "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    //updateUI(user);
-                                    //Go to Main Activity
-                                    //startActivity(new Intent(LogIn.this, MainActivity.class));
-                                    Toast.makeText(LogIn.this, "Welcome.",
-                                            Toast.LENGTH_SHORT).show();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    //Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(LogIn.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                    //updateUI(null);
+        //If no user is logged in, take user to login activity.
+        if (userData.userID_Global == null){
+            //startActivity(new Intent(MainActivity.this, LogIn.class));
+        }
+
+        if (userData.userID_Global == null) {
+
+            btnLogIn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Get Values
+                    String email = txtEmail.getText().toString().trim();
+                    String password = txtPassword.getText().toString().trim();
+
+                    //Check Form has been Filled in
+                    if (TextUtils.isEmpty(email)) {
+                        Toast.makeText(LogIn.this, "Please enter an email address.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+                    if (TextUtils.isEmpty(password)) {
+                        Toast.makeText(LogIn.this, "Please enter a password.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    //Check Password Length (>8)
+                    if (password.length() < 8) {
+                        Toast.makeText(LogIn.this, "Passwords must be at least 8 characters.", Toast.LENGTH_SHORT).show();
+                    }
+
+                    //Sign in existing users
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LogIn.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        //Log.d(TAG, "signInWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        //updateUI(user);
+                                        //Go to Main Activity
+                                        startActivity(new Intent(LogIn.this, MainActivity.class));
+                                        Toast.makeText(LogIn.this, "Welcome.",
+                                                Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        //Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                        Toast.makeText(LogIn.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
+                                        //updateUI(null);
+                                    }
+
+                                    // ...
                                 }
+                            });
 
-                                // ...
-                            }
-                        });
+                }
+            });
 
+        }//end if
+        else {
+            //Log in session already exists
+            //Take user to main activity (removed animation)
+            startActivity(new Intent(LogIn.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
 
-            }
-        });
+        }
     }
 }
