@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,7 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class accountDetails extends AppCompatActivity {
-    private static final String USERID_KEY = "userID";
+
+    //---Firestore---//
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -40,6 +43,9 @@ public class accountDetails extends AppCompatActivity {
     EditText txtCountyState;
     EditText txtCountry;
     EditText txtPhoneNum;
+    //For Progress Bar
+    LinearLayout linearLayout;
+    ProgressBar accountProgressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,57 +54,80 @@ public class accountDetails extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-        //---Show Data---//
-        //userIDTextView.setText(userData.userID_Global);
-
-        //Try go get data
-
         //---Get Widgets---//
         userIDTextView = findViewById(R.id.userIDTextView);
+        userIDTextView = findViewById(R.id.userIDTextView);
+        txtFName = findViewById(R.id.fNameEditText);
+        txtLName = findViewById(R.id.lnameEditText);
+        txtAddress = findViewById(R.id.addressEditText);
+        txtPostcodeZip = findViewById(R.id.postcodeZipEditText);
+        txtCountyState = findViewById(R.id.countyStateEditText);
+        txtCountry = findViewById(R.id.countryEditText);
+        txtPhoneNum = findViewById(R.id.phoneNumEditText);
+        //For Progress Bar
+        linearLayout = findViewById(R.id.linearLayout);
+        accountProgressbar = findViewById(R.id.accountprogressBar);
 
-        //---Get Values---//
+        //---Get User ID from global variable---//
         String userID = userData.userID_Global;
-        //--Set Values---//
+
+        //--Display User ID---//
         userIDTextView.setText(userID);
 
+        try {
+            //---Get user data from firestore---//
+            DocumentReference docRef = db.collection("user").document(userID);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            //---Retrieve data and store as string---//
+                            String FSFirstname = document.getString("First Name");
+                            String FSLastname = document.getString("Last Name");
+                            String FSAddress = document.getString("Address");
+                            String FSPostcodeZip = document.getString("Postcode_Zip");
+                            String FSCountyState = document.getString("County_State");
+                            String FSCountry = document.getString("Country");
+                            String FSPhoneNum = document.getString("Phone_Num");
 
-        DocumentReference docRef = db.collection("user").document(userID);
-        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
+                            //---Display in edit texts ---//
+                            txtFName.setText(FSFirstname);
+                            txtLName.setText(FSLastname);
+                            txtAddress.setText(FSAddress);
+                            txtPostcodeZip.setText(FSPostcodeZip);
+                            txtCountyState.setText(FSCountyState);
+                            txtCountry.setText(FSCountry);
+                            txtPhoneNum.setText(FSPhoneNum);
 
-                        String Testname = document.getString("First Name");
-                        //txtFName.setText(Testname + " ");
-                        Toast.makeText(accountDetails.this,  "User data found " + Testname , Toast.LENGTH_SHORT).show();
-                        //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                            //Hide progress bar and show data
+                            accountProgressbar.setVisibility(View.INVISIBLE);
+                            linearLayout.setVisibility(View.VISIBLE);
+                            //Toast.makeText(accountDetails.this,  "User data found " + FSFirstname , Toast.LENGTH_SHORT).show();
+                            //Log.d(TAG, "DocumentSnapshot data: " + document.getData());
+                        } else {
+                            //An error has occured, display error message and remove user from page.
+                            Toast.makeText(accountDetails.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                            startActivity(new Intent(accountDetails.this, Profile.class));
+                            //Log.d(TAG, "No such document");
+                        }
                     } else {
-                        //Log.d(TAG, "No such document");
+                        //Log.d(TAG, "get failed with ", task.getException());
                     }
-                } else {
-                    //Log.d(TAG, "get failed with ", task.getException());
                 }
-            }
-        });
+            });
+        }
+
+        catch(Exception e) {
+                //Error
+        }
 
         //---Save Button---//
         FloatingActionButton fab = findViewById(R.id.save_btn);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                //---Get Widgets---//
-                userIDTextView = findViewById(R.id.userIDTextView);
-                txtFName = findViewById(R.id.fNameEditText);
-                txtLName = findViewById(R.id.lnameEditText);
-                txtAddress = findViewById(R.id.addressEditText);
-                txtPostcodeZip = findViewById(R.id.postcodeZipEditText);
-                txtCountyState = findViewById(R.id.countyStateEditText);
-                txtCountry = findViewById(R.id.countryEditText);
-                txtPhoneNum = findViewById(R.id.phoneNumEditText);
 
                 //---Get Values---//
                 String userID = userData.userID_Global;
@@ -110,7 +139,8 @@ public class accountDetails extends AppCompatActivity {
                 String country = txtCountry.getText().toString().trim();
                 String phoneNum = txtPhoneNum.getText().toString().trim();
 
-
+                //---Check all edit texts are completed---//
+                //If statement
 
                 //Save Data to Firestore
 
@@ -122,7 +152,7 @@ public class accountDetails extends AppCompatActivity {
                 user.put("Postcode_Zip",postcodeZip);
                 user.put("County_State", countyState);
                 user.put("Country", country);
-                user.put("Phone Num", phoneNum);
+                user.put("Phone_Num", phoneNum);
 
 
                 db.collection("user").document(userID)

@@ -35,6 +35,11 @@ public class MainActivity extends AppCompatActivity {
         useridTextView.setText(userData.userID_Global);
     }
 
+    public void taketotest(View view){
+
+        startActivity(new Intent(MainActivity.this, testactivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
 
 
     public void goToProfile(View view){
