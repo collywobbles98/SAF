@@ -80,6 +80,9 @@ public class Register extends AppCompatActivity {
 
                 //Check passwords match
                 if(password.equals(confirmPassword)){
+                    //Store Users Email
+                    userData.email_Global = email;
+
                     //Sign up new users
                     mAuth.createUserWithEmailAndPassword(email, password)
                             .addOnCompleteListener(Register.this, new OnCompleteListener<AuthResult>() {
@@ -96,14 +99,7 @@ public class Register extends AppCompatActivity {
                                         Toast.makeText(Register.this, "Registration Complete..",
                                                 Toast.LENGTH_SHORT).show();
                                         //Go to Main Activity
-                                        startActivity(new Intent(Register.this, MainActivity.class));
-
-
-                                        //Put user into user table
-
-
-                                        //******
-
+                                        startActivity(new Intent(Register.this, Tutorial1.class));
 
                                     } else {
                                         // If sign in fails, display a message to the user.

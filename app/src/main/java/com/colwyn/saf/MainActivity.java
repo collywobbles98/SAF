@@ -10,11 +10,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -86,6 +89,42 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         userData.userID_Global = user.getUid();
+        String userID = user.getUid();
+
+        //--Get User Email from firestore---//
+
+        try {
+            DocumentReference docRef = db.collection("user").document(userID);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+
+                            //---Retrieve data and store as string---//
+                            String FSUserEmail = document.getString("Email");
+
+                            //---Save it to global variable---//
+                            userData.email_Global = FSUserEmail;
+
+                        } else {
+                            //An error has occured, display error message and remove user from page.
+                            Toast.makeText(MainActivity.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                            //startActivity(new Intent(accountDetails.this, Profile.class));
+                            //Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        //Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+        }
+
+        catch(Exception e) {
+            //Error
+        }
+
 
         //If no user is logged in, take user to login activity.
         if (userData.userID_Global == null){

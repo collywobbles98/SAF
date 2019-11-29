@@ -35,7 +35,7 @@ public class accountDetails extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //---Declare Widgets---//
-    TextView userIDTextView;
+    TextView userEmailTextView;
     EditText txtFName;
     EditText txtLName;
     EditText txtAddress;
@@ -55,8 +55,7 @@ public class accountDetails extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         //---Get Widgets---//
-        userIDTextView = findViewById(R.id.userIDTextView);
-        userIDTextView = findViewById(R.id.userIDTextView);
+        userEmailTextView = findViewById(R.id.userEmailTextView);
         txtFName = findViewById(R.id.fNameEditText);
         txtLName = findViewById(R.id.lnameEditText);
         txtAddress = findViewById(R.id.addressEditText);
@@ -68,11 +67,10 @@ public class accountDetails extends AppCompatActivity {
         linearLayout = findViewById(R.id.linearLayout);
         accountProgressbar = findViewById(R.id.accountprogressBar);
 
-        //---Get User ID from global variable---//
+        //---Get User ID & Email from global variable---//
         String userID = userData.userID_Global;
+        String email = userData.email_Global;
 
-        //--Display User ID---//
-        userIDTextView.setText(userID);
 
         try {
             //---Get user data from firestore---//
@@ -101,6 +99,11 @@ public class accountDetails extends AppCompatActivity {
                             txtCountry.setText(FSCountry);
                             txtPhoneNum.setText(FSPhoneNum);
 
+
+                            //--Display User Email---//
+                            userEmailTextView.setText(userData.email_Global);
+
+
                             //Hide progress bar and show data
                             accountProgressbar.setVisibility(View.INVISIBLE);
                             linearLayout.setVisibility(View.VISIBLE);
@@ -109,7 +112,7 @@ public class accountDetails extends AppCompatActivity {
                         } else {
                             //An error has occured, display error message and remove user from page.
                             Toast.makeText(accountDetails.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(accountDetails.this, Profile.class));
+                            //startActivity(new Intent(accountDetails.this, Profile.class));
                             //Log.d(TAG, "No such document");
                         }
                     } else {
@@ -131,6 +134,7 @@ public class accountDetails extends AppCompatActivity {
 
                 //---Get Values---//
                 String userID = userData.userID_Global;
+                String email = userData.email_Global;
                 String fName = txtFName.getText().toString().trim();
                 String lName = txtLName.getText().toString().trim();
                 String address = txtAddress.getText().toString().trim();
@@ -146,6 +150,7 @@ public class accountDetails extends AppCompatActivity {
 
                 Map<String, Object> user = new HashMap<>();
                 user.put("userID", userID);
+                user.put("Email", email);
                 user.put("First Name", fName);
                 user.put("Last Name", lName);
                 user.put("Address", address);

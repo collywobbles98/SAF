@@ -7,6 +7,30 @@
     android:layout_height="match_parent"
     tools:context=".accountDetails">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar3"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="#424C55"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/spark_air_fuel"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#F6F7EB"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ProgressBar
         android:id="@+id/accountprogressBar"
         style="?android:attr/progressBarStyle"
@@ -29,43 +53,34 @@
         app:srcCompat="@drawable/ic_save_black_24dp" />
 
 
-    <TextView
-        android:id="@+id/userIDTitleTextView"
-        android:layout_width="268dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="25dp"
-        android:text="Your unique userid: "
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/userIDTextView"
-        android:layout_width="377dp"
-        android:layout_height="36dp"
-        android:layout_marginTop="5dp"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="#000000"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIDTitleTextView" />
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="320dp"
         android:layout_height="511dp"
-        android:layout_marginTop="25dp"
         android:orientation="vertical"
         android:visibility="invisible"
-        android:weightSum="14"
+        android:weightSum="16"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userIDTextView">
+        app:layout_constraintTop_toTopOf="@+id/toolbar3">
+
+        <TextView
+            android:id="@+id/textView17"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_weight="1"
+            android:text="Email Address:"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/userEmailTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/textView5"

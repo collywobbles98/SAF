@@ -94,4 +94,5 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_account_details">accountDetails</string>
     <string name="profile_title"><![CDATA[My Spark Air & Fuel]]></string>
+    <string name="consent"><![CDATA[Spark Air & Fiel collects and uses data about you to enable core functionality, fulfil your purchases, tailor your app experience! To help support our app, we ask for your consent to deliver the best experience to you.]]></string>
 </resources>
