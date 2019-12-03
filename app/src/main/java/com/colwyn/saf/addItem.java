@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -36,18 +35,32 @@ public class addItem extends AppCompatActivity {
     Button chooseButton;
     Button uploadButton;
     ImageView itemImageView;
-    EditText testTextView;
+
+    ImageView chooseImageButton2;
 
     private Uri imgUrl;
     private Uri filepath;
     private final int PICK_IMAGE_REQUEST = 1;
     private StorageTask mUploadTask;
 
+    //---Cancel Button---//
+    public void cancelClicked (View view){
+        startActivity(new Intent(addItem.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
     //---Choose Button Clicked---//
     public void chooseClicked (View view){
 
         //Choose Image Method
         chooseImage();
+
+        //Hide Choose Button 2
+        chooseImageButton2 = findViewById(R.id.choosebtn2);
+        chooseImageButton2.setVisibility(View.GONE);
+
+        //Show Choose Button (Change Image Button)
+        chooseButton = findViewById(R.id.choosebtn);
+        chooseButton.setVisibility(View.VISIBLE);
     }
 
     //---Upload Button Clicked---//
@@ -55,6 +68,9 @@ public class addItem extends AppCompatActivity {
 
         //Upload Image Method
         uploadImage();
+
+        //---Save Item to Firestore (Database)---//
+
     }
 
     @Override
@@ -99,18 +115,10 @@ public class addItem extends AppCompatActivity {
                             while (!urlTask.isSuccessful());
                             Uri downloadUrl = urlTask.getResult();
 
-                            //---Test---//
-                            testTextView = findViewById(R.id.testTextView);
-
-
-                            //
                             progressDialog.dismiss();
                             Toast.makeText(addItem.this, "Uploaded Complete. " + downloadUrl, Toast.LENGTH_SHORT).show();
-                            testTextView.setText(downloadUrl + "");
 
                             StorageMetadata snapshotMetadata= taskSnapshot.getMetadata();
-                            //Task<Uri> downloadUrl = filepath.getDownloadrl();
-
 
                         }
                     })
@@ -128,10 +136,6 @@ public class addItem extends AppCompatActivity {
                             progressDialog.setMessage("Uploaded " + (int)progress + "%");
                         }
                     });
-
-
-
-
 
         }
     }
