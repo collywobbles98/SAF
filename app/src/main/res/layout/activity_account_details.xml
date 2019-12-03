@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="@string/spark_air_fuel"
+        android:text="Personal Details"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#F6F7EB"
         android:textSize="24sp"

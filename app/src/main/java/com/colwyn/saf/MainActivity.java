@@ -43,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, testactivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
+    //---Navigation---//
+    public void sellingClicked(View view){
 
+        startActivity(new Intent(MainActivity.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
 
     public void goToProfile(View view){
 
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         userData.userID_Global = user.getUid();
         String userID = user.getUid();
 
-        //--Get User Email from firestore---//
+        //--Get User Email, firstname and lastname from firestore---//
 
         try {
             DocumentReference docRef = db.collection("user").document(userID);
@@ -104,9 +108,13 @@ public class MainActivity extends AppCompatActivity {
 
                             //---Retrieve data and store as string---//
                             String FSUserEmail = document.getString("Email");
+                            String FSFirstname = document.getString("First Name");
+                            String FSLastname = document.getString("Last Name");
 
-                            //---Save it to global variable---//
+                            //---Save to global variable---//
                             userData.email_Global = FSUserEmail;
+                            userData.firstname_Global = FSFirstname;
+                            userData.lastname_Global = FSLastname;
 
                         } else {
                             //An error has occured, display error message and remove user from page.

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C5C5C5"
     tools:context=".Profile">
 
     <androidx.appcompat.widget.Toolbar
@@ -55,6 +56,7 @@
         tools:srcCompat="@drawable/person_24dp" />
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:background="#FF5A5F"
@@ -79,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
-            app:srcCompat="@drawable/add_box_white" />
+            android:onClick="sellingClicked"
+            app:srcCompat="@drawable/selling_white" />
 
         <ImageButton
             android:id="@+id/basketButton"
@@ -123,23 +126,22 @@
         android:id="@+id/logoutbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="104dp"
         android:onClick="testclicked"
         android:text="Log Out"
+        app:layout_constraintBottom_toBottomOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameTextView" />
+        app:layout_constraintTop_toTopOf="@+id/toolbar2" />
 
     <Button
         android:id="@+id/editdetailsBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginBottom="20dp"
         android:onClick="personalDetailsClicked"
         android:text="Edit Personal Details"
+        app:layout_constraintBottom_toTopOf="@+id/logoutbtn"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutbtn" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -33,6 +33,12 @@ public class Profile extends AppCompatActivity {
 
      }
 
+     //Selling Activity
+     public void sellingClicked(View view){
+
+         startActivity(new Intent(Profile.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+     }
+
      public void testclicked (View view){
 
          usernameTextView = findViewById(R.id.usernameTextView);
@@ -56,7 +62,7 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
         usernameTextView = findViewById(R.id.usernameTextView);
-        usernameTextView.setText(userData.userID_Global);
+        usernameTextView.setText(userData.firstname_Global + " " + userData.lastname_Global);
 
 
     }

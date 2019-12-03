@@ -110,7 +110,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
-            app:srcCompat="@drawable/add_box_white" />
+            android:onClick="sellingClicked"
+            app:srcCompat="@drawable/selling_white" />
 
         <ImageButton
             android:id="@+id/basketButton"
