@@ -42,8 +42,6 @@ public class Tutorial1 extends AppCompatActivity {
         user.put("userID", userID);
         user.put("Email", email);
 
-
-
         db.collection("user").document(userID)
                 .set(user)//, SetOptions.merge())
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -65,7 +63,7 @@ public class Tutorial1 extends AppCompatActivity {
     }
 
     public void dontAgreeClicked (View view) {
-
+        //Remove User From Firebase Auth and return to login page.
     }
 
 

@@ -19,7 +19,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 public class SellItem extends AppCompatActivity {
 
@@ -85,7 +84,7 @@ public class SellItem extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode==RESULT_OK && data!= null && data.getData() != null){
             imageUri=data.getData();
 
-            Picasso.with(this).load(imageUri).into(itemImage);
+            //Picasso.with(this).load(imageUri).into(itemImage);
             itemImage.setImageURI(imageUri);
         }
     }

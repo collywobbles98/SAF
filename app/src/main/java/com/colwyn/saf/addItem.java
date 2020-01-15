@@ -120,7 +120,8 @@ public class addItem extends AppCompatActivity {
         startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_REQUEST);
     }
 
-    private void uploadImage() {
+
+    private void uploadImage() { //and get URL
 
         if (filepath != null) {
 
@@ -367,6 +368,7 @@ public class addItem extends AppCompatActivity {
 
     }
 
+    //Picasso Image Viewer
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -374,7 +376,7 @@ public class addItem extends AppCompatActivity {
         if(requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null){
             filepath= data.getData();
 
-            Picasso.with(this).load(filepath).into(itemImageView);
+            Picasso.get().load(filepath).into(itemImageView);
             itemImageView.setImageURI(filepath);
         }
     }
