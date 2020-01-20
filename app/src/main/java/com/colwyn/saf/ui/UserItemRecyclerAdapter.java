@@ -45,7 +45,11 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
         UserItem userItem = UserItemList.get(position);
         String imageURL;
 
+        //Display Data
         viewHolder.title.setText(userItem.getTitle());
+        viewHolder.category.setText("Category: " + userItem.getCategory());
+        viewHolder.brand.setText("Brand: " +userItem.getBrand());
+        viewHolder.price.setText("Price: " +userItem.getPrice());
 
         imageURL = userItem.getImageURL();
         Picasso.get().load(imageURL).placeholder(R.drawable.ic_add_a_photo_black_24dp).fit().into(viewHolder.image);
@@ -59,7 +63,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Widgets
-        public TextView imageURL, title, category, description, brand, condition, price, delivery_Notes, userID;
+        public TextView title, category, description, brand, condition, price, delivery_Notes, userID;
         public ImageView image;
         String UserID;
 
@@ -71,6 +75,10 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
             //Get Widgets
             title = itemView.findViewById(R.id.ItemRowTextView);
             image = itemView.findViewById(R.id.ItemRowImageView);
+            category = itemView.findViewById(R.id.ItemRowCatTextView);
+            brand = itemView.findViewById(R.id.ItemRowBraTextView);
+            price = itemView.findViewById(R.id.ItemRowPriTextView);
+
 
 
         }
