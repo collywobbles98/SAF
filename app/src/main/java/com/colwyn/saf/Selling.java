@@ -35,6 +35,7 @@ public class Selling extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UserItemRecyclerAdapter userItemRecyclerAdapter;
     private TextView noItemsTextView;
+    private TextView itemCountTextView;
 
 
     //---Navigation---//
@@ -79,12 +80,14 @@ public class Selling extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             //Check if the query is not empty
                             if (!task.getResult().isEmpty()) {
-
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     UserItem userItem = document.toObject(UserItem.class);
                                     UserItemList.add(userItem);
-                                }
 
+                                    //Display how many items the user has for sale
+                                    itemCountTextView = findViewById(R.id.itemCountTextView);
+                                    itemCountTextView.setText(task.getResult().size() + "");
+                                }
                                 //Invoke Recycler View
                                 userItemRecyclerAdapter = new UserItemRecyclerAdapter(Selling.this, UserItemList);
                                 recyclerView.setAdapter(userItemRecyclerAdapter);
@@ -100,7 +103,13 @@ public class Selling extends AppCompatActivity {
                         } else {
                             //Log.d(TAG, "Error getting documents: ", task.getException());
                         }
+
                     }
+
                 });
+
+
+
+
     }
 }

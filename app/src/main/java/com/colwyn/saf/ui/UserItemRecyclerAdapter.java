@@ -53,6 +53,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
 
     @Override
     public int getItemCount() {
+
         return UserItemList.size();
     }
 
