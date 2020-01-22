@@ -90,15 +90,22 @@ public class Selling extends AppCompatActivity {
                             //Check if the query is not empty
                             if (!task.getResult().isEmpty()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    UserItem userItem = document.toObject(UserItem.class);
+
+                                    //Get Document ID
+                                    String docID= document.getId();
+
+
+                                    UserItem userItem = document.toObject(UserItem.class).withId(docID);
                                     UserItemList.add(userItem);
+
+
 
                                     //Display how many items the user has for sale
                                     itemCountTextView = findViewById(R.id.itemCountTextView);
                                     itemCountTextView.setText(task.getResult().size() + "");
                                 }
                                 //Invoke Recycler View
-                                userItemRecyclerAdapter = new UserItemRecyclerAdapter(Selling.this, UserItemList);
+                                userItemRecyclerAdapter = new UserItemRecyclerAdapter(getApplicationContext(), UserItemList);
                                 recyclerView.setAdapter(userItemRecyclerAdapter);
                                 userItemRecyclerAdapter.notifyDataSetChanged();
 

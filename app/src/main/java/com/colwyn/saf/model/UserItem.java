@@ -1,6 +1,6 @@
 package com.colwyn.saf.model;
 
-public class UserItem {
+public class UserItem extends ItemDocID{
 
     private String ImageURL;
     private String Title;
