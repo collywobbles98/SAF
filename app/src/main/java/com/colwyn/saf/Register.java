@@ -38,7 +38,7 @@ public class Register extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         txtConfirmPassword = findViewById(R.id.txtConfirmPassword);
-        btnRegister = findViewById(R.id.btnRegister);
+        btnRegister = findViewById(R.id.signUpButton);
         //progressBar = findViewById(R.id.progressBar);
 
         //Show progress bar

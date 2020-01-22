@@ -146,7 +146,7 @@ public class addItem extends AppCompatActivity {
                             urlTextView.setText(downloadUrl.toString());
                             savedata();
 
-                            Toast.makeText(addItem.this, "Uploaded Complete. " + downloadUrl, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(addItem.this, "Uploaded Complete. " + downloadUrl, Toast.LENGTH_SHORT).show();
                             StorageMetadata snapshotMetadata= taskSnapshot.getMetadata();
 
                         }
@@ -180,8 +180,6 @@ public class addItem extends AppCompatActivity {
     private void savedata(){
 
         //---Save Item to Firestore (Database)---//
-
-        Toast.makeText(addItem.this, "this happens After", Toast.LENGTH_SHORT).show();
 
         //---Get Widgets---//
         titleEditText = findViewById(R.id.titleEditText);
@@ -356,6 +354,8 @@ public class addItem extends AppCompatActivity {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
                         //Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        //Go back to Selling Activity
+                        startActivity(new Intent(addItem.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

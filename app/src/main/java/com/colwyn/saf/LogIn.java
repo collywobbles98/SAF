@@ -6,6 +6,8 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -20,14 +22,99 @@ import com.google.firebase.auth.FirebaseUser;
 public class LogIn extends AppCompatActivity {
 
     EditText txtEmail, txtPassword;
-    Button btnLogIn;
+    Button btnLogIn, sendEmailButton, cancelResetButton;
+    Button resetPasswordButton, signUpButton;
+    TextView titleTextView;
+    ImageView lockImageView;
+
     //Declare an instance of FirebaseAuth
     private FirebaseAuth mAuth;
+
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
     //Take user to Register Activity
     public void registerLink(View view){
         startActivity(new Intent(LogIn.this, Register.class));
     }
+
+    //---Password Reset Button Clicked---//
+    public void resetPasswordClicked(View view){
+
+        //Get Widgets
+        resetPasswordButton = findViewById(R.id.resetPasswordButton);
+        titleTextView = findViewById(R.id.titleTextView);
+        txtPassword = findViewById(R.id.txtPassword);
+        btnLogIn = findViewById(R.id.btnLogIn);
+        lockImageView = findViewById(R.id.lockImageView);
+        signUpButton = findViewById(R.id.signUpButton);
+        sendEmailButton = findViewById(R.id.sendEmailButton);
+        cancelResetButton = findViewById(R.id.cancelResetButton);
+
+        //Change the form
+        titleTextView.setText("RESET PASSWORD");
+        txtPassword.setVisibility(View.GONE);
+        lockImageView.setVisibility(View.GONE);
+        resetPasswordButton.setVisibility(View.GONE);
+        signUpButton.setVisibility(View.GONE);
+        btnLogIn.setVisibility(View.GONE);
+        sendEmailButton.setVisibility(View.VISIBLE);
+        cancelResetButton.setVisibility(View.VISIBLE);
+
+    }
+
+    //---Send Reset Password---//
+    public void sendEmailClicked(View view){
+
+
+        sendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Get Values
+                String email = txtEmail.getText().toString().trim();
+
+                //Check Form has been Filled in
+                if (TextUtils.isEmpty(email)) {
+                    //No Email Entered (Display Error Message)
+                    Toast.makeText(LogIn.this, "Please enter an email address.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (!TextUtils.isEmpty(email)) {
+                    //Email Entered
+                    auth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LogIn.this, "Email Sent", Toast.LENGTH_SHORT).show();
+                                        recreate();
+                                        return;
+
+                                    }
+
+                                    else{
+                                        Toast.makeText(LogIn.this, "An Error has occured. Please Check your Email.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+
+
+            }
+        });
+
+
+    }
+
+    //---Cancel Send Email---//
+    public void cancelSendEmailClicked(View view){
+        //Reload Activity
+        recreate();
+    }
+
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,12 +137,6 @@ public class LogIn extends AppCompatActivity {
         catch(Exception e) {
 
             //No Current Firebase User, Let user sign in.
-        }
-
-
-        //If no user is logged in, take user to login activity.
-        if (userData.userID_Global == null){
-            //startActivity(new Intent(MainActivity.this, LogIn.class));
         }
 
         if (userData.userID_Global == null) {
@@ -111,6 +192,7 @@ public class LogIn extends AppCompatActivity {
                 }
             });
 
+
         }//end if
         else {
             //Log in session already exists
@@ -118,5 +200,7 @@ public class LogIn extends AppCompatActivity {
             startActivity(new Intent(LogIn.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
 
         }
+
+
     }
 }

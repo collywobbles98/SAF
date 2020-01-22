@@ -3,6 +3,7 @@ package com.colwyn.saf;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.colwyn.saf.model.UserItem;
 import com.colwyn.saf.ui.UserItemRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -28,6 +31,7 @@ public class Selling extends AppCompatActivity {
     //---Firebase & Firestore---//
     private StorageReference mStorageRef;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     //Firestore Collection Reference
     private CollectionReference collectionReference = db.collection("listings");
 
@@ -35,7 +39,9 @@ public class Selling extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UserItemRecyclerAdapter userItemRecyclerAdapter;
     private TextView noItemsTextView;
+    private ImageView noItemsImageView;
     private TextView itemCountTextView;
+    String userIDFB = user.getUid();
 
 
     //---Navigation---//
@@ -50,6 +56,8 @@ public class Selling extends AppCompatActivity {
     //Sell Item Activity
     public void sellClicked (View view) {
         startActivity(new Intent(Selling.this, addItem.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+        //Close Activity to force a refresh
+        finish();
     }
 
 
@@ -59,6 +67,7 @@ public class Selling extends AppCompatActivity {
         setContentView(R.layout.activity_selling);
 
         noItemsTextView = findViewById(R.id.noItemsTextView);
+        noItemsImageView = findViewById(R.id.noItemsImageView);
         UserItemList = new ArrayList<>();
         recyclerView = findViewById(R.id.itemRecyclerView);
         recyclerView.setHasFixedSize(true);
@@ -72,7 +81,7 @@ public class Selling extends AppCompatActivity {
         super.onStart();
 
         //---Query to get items of current user---//
-        collectionReference.whereEqualTo("UserID", userData.userID_Global)
+        collectionReference.whereEqualTo("UserID", userIDFB)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -95,8 +104,9 @@ public class Selling extends AppCompatActivity {
 
                             }
                             else {
-                                //Display NoItemTextView
+                                //Display NoItem TextView and ImageView
                                 noItemsTextView.setVisibility(View.VISIBLE);
+                                noItemsImageView.setVisibility(View.VISIBLE);
 
                             }
 
