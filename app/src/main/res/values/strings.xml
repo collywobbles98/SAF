@@ -97,4 +97,5 @@
     <string name="consent"><![CDATA[Spark Air & Fiel collects and uses data about you to enable core functionality, fulfil your purchases, tailor your app experience! To help support our app, we ask for your consent to deliver the best experience to you.]]></string>
     <string name="title_activity_main2">Main2Activity</string>
     <string name="title_activity_sell_item">SellItem</string>
+    <string name="title_activity_listing_view">listingView</string>
 </resources>

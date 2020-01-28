@@ -119,7 +119,7 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/titleTextView"
+                        android:id="@+id/TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -140,7 +140,7 @@
                         android:inputType="textPersonName"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+                        app:layout_constraintTop_toBottomOf="@+id/TextView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
             <Space

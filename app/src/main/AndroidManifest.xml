@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".addItem"></activity>
+        <activity
+            android:name=".listingView"
+            android:label="@string/title_activity_listing_view"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".addItem" />
         <activity android:name=".SellItem" />
         <activity android:name=".Selling" />
         <activity android:name=".Tutorial1" />

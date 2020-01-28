@@ -42,7 +42,7 @@ public class LogIn extends AppCompatActivity {
 
         //Get Widgets
         resetPasswordButton = findViewById(R.id.resetPasswordButton);
-        titleTextView = findViewById(R.id.titleTextView);
+        titleTextView = findViewById(R.id.TextView);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogIn = findViewById(R.id.btnLogIn);
         lockImageView = findViewById(R.id.lockImageView);

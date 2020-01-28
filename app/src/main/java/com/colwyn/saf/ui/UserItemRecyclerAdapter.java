@@ -1,6 +1,7 @@
 package com.colwyn.saf.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.colwyn.saf.R;
+import com.colwyn.saf.listingView;
 import com.colwyn.saf.model.UserItem;
+import com.colwyn.saf.userData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -62,6 +65,17 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
+
+                //Store Document ID in Global Variable
+                userData.userItemClicked_Global = documentID;
+
+                //Move to listing view Acivity
+                Intent intent = new Intent(context, listingView.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+
+
             }
         });
     }

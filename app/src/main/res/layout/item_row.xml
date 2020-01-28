@@ -26,6 +26,7 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:cropToPadding="true"
+                android:padding="5dp"
                 android:scaleType="fitXY"
                 android:src="@color/cardview_dark_background" />
 

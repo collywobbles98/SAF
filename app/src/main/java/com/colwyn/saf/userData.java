@@ -8,4 +8,7 @@ public class userData {
     public static String lastname_Global;
     public static Integer itemCount_Global;
 
+    public static  String userItemClicked_Global;
+    public static Boolean listingEdit_Global;
+
 }
