@@ -1,5 +1,6 @@
 package com.colwyn.saf;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,10 +9,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +35,57 @@ public class listingView extends AppCompatActivity {
     TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView;
     ImageView itemImageView;
 
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("Delete Listing")
+                .setMessage("Do you want to Delete this listing titled " + titleTextView.getText().toString() + "?")
+                .setIcon(R.drawable.ic_delete_forever_black_24dp)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Delete Listing
+                        db.collection("listings").document(userData.userItemClicked_Global)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        startActivity(new Intent(listingView.this, Selling.class));
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(listingView.this, "An error has occurred, please try again.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+
+                        dialog.dismiss();
+
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+
+    //Delete Button
+    public void deleteClicked (View view){
+        AlertDialog diaBox = AskOption();
+        diaBox.show();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,8 +154,6 @@ public class listingView extends AppCompatActivity {
             Toast.makeText(listingView.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
 
         }
-
-
 
 
         //---Edit Button---//

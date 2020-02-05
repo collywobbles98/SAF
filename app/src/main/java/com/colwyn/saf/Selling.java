@@ -66,6 +66,10 @@ public class Selling extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_selling);
 
+        //---Reset Edit Item Variable to False (New listing not an edit)---//
+        userData.listingEdit_Global = false;
+        userData.userItemClicked_Global = null;
+
         noItemsTextView = findViewById(R.id.noItemsTextView);
         noItemsImageView = findViewById(R.id.noItemsImageView);
         UserItemList = new ArrayList<>();
@@ -79,6 +83,9 @@ public class Selling extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+        //---Reset Edit Item Variable to False (New listing not an edit)---//
+        userData.listingEdit_Global = false;
 
         //---Query to get items of current user---//
         collectionReference.whereEqualTo("UserID", userIDFB)
