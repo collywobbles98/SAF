@@ -376,7 +376,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
 
                     <TextView
-                        android:id="@+id/conditionTextView"
+                        android:id="@+id/catItemRowconditionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -396,10 +396,10 @@
                         android:inputType="textPersonName"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/brandTextView" />
+                        app:layout_constraintTop_toBottomOf="@+id/catItemRowbrandTextView" />
 
                     <TextView
-                        android:id="@+id/brandTextView"
+                        android:id="@+id/catItemRowbrandTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
@@ -415,7 +415,7 @@
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/conditionTextView">
+                        app:layout_constraintTop_toBottomOf="@+id/catItemRowconditionTextView">
 
                         <RadioButton
                             android:id="@+id/newrbtn"

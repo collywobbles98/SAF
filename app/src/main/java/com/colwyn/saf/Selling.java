@@ -78,6 +78,8 @@ public class Selling extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
+
+
     }
 
     @Override

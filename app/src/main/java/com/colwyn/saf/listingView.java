@@ -96,11 +96,11 @@ public class listingView extends AppCompatActivity {
 
         //---Load Data into Activity---//
         //Get Widgets
-        titleTextView = findViewById(R.id.titleTextView);
-        priceTextView = findViewById(R.id.priceTextView);
-        deliveryTextView = findViewById(R.id.deliveryTextView);
-        conditionTextView = findViewById(R.id.conditionTextView);
-        brandTextView = findViewById(R.id.brandTextView);
+        titleTextView = findViewById(R.id.catItemRowtitleTextView);
+        priceTextView = findViewById(R.id.catItemRowpriceTextView);
+        deliveryTextView = findViewById(R.id.catItemRowdeliveryTextView);
+        conditionTextView = findViewById(R.id.catItemRowconditionTextView);
+        brandTextView = findViewById(R.id.catItemRowbrandTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
         itemImageView = findViewById(R.id.itemImageView);
 
