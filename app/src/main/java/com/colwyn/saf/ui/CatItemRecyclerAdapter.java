@@ -1,17 +1,21 @@
 package com.colwyn.saf.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.colwyn.saf.CatListingView;
 import com.colwyn.saf.R;
 import com.colwyn.saf.model.CatItem;
+import com.colwyn.saf.userData;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -56,25 +60,25 @@ public class CatItemRecyclerAdapter extends RecyclerView.Adapter<CatItemRecycler
         Picasso.get().load(imageURL).placeholder(R.drawable.ic_add_a_photo_black_24dp).fit().into(viewHolder.image);
 
         //Get Document ID onclick
-//        final String documentID = CatItemList.get(position).docID;
-//
-//        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
-//
-//                //Store Document ID in Global Variable
-//                userData.userItemClicked_Global = documentID;
-//
-//                //Move to listing view Acivity
-//                Intent intent = new Intent(context, listingView.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
-//
-//
-//
-//            }
-//        });
+        final String documentID = CatItemList.get(position).docID;
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
+
+                //Store Document ID in Global Variable
+                userData.catItemClicked_Global = documentID;
+
+                //Move to listing view Acivity
+                Intent intent = new Intent(context, CatListingView.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+
+
+            }
+        });
     }
 
     @Override

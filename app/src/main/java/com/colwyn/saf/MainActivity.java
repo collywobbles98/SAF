@@ -55,12 +55,16 @@ public class MainActivity extends AppCompatActivity {
         startActivity(new Intent(MainActivity.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
+    public void basketClicked(View view){
+
+        startActivity(new Intent(MainActivity.this, basket.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
     public void goToProfile(View view){
 
         userData.userID_Global = user.getUid();
 
         startActivity(new Intent(MainActivity.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-
     }
 
     @Override

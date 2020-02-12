@@ -9,10 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".basket"></activity>
+        <activity android:name=".CatListingView" />
         <activity
             android:name=".listingView"
             android:label="@string/title_activity_listing_view"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".addItem" />
         <activity android:name=".SellItem" />
         <activity android:name=".Selling" />

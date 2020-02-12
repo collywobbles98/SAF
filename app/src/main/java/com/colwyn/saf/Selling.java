@@ -45,6 +45,11 @@ public class Selling extends AppCompatActivity {
 
 
     //---Navigation---//
+    //Basket Activity
+    public void basketClicked(View view){
+
+        startActivity(new Intent(Selling.this, basket.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
     //profile activity
     public void profileClicked(View view){
         startActivity(new Intent(Selling.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));

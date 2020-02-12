@@ -18,4 +18,9 @@ public class userData {
     public static Boolean listingEdit_Global;
     public static  String FSImageURL_Global;
 
+    //Catalogue Items
+    public static String catItemClicked_Global;
+    public static String itemSeller_Global;
+    public static String imageURLBasket_Global;
+
 }

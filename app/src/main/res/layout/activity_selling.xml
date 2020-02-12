@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginTop="10dp"
-        android:text="Your Store"
+        android:text="Selling"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#F6F7EB"
         android:textSize="24sp"
@@ -33,9 +33,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="375dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,11 +49,18 @@
 
             <Button
                 android:id="@+id/sellbtn"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="45dp"
+                android:backgroundTint="#0984E3"
                 android:onClick="sellClicked"
                 android:text="Sell an Item"
+                android:textAlignment="center"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.502"
                 app:layout_constraintStart_toStartOf="parent"
@@ -87,9 +96,11 @@
 
     <RelativeLayout
         android:id="@+id/relativeLayout"
-        android:layout_width="375dp"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,19 +120,20 @@
         android:id="@+id/noItemsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Your Store is Empty."
+        android:text="Your Store is Empty"
         android:textAlignment="center"
-        android:textStyle="bold"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/noItemsImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
+        app:layout_constraintVertical_bias="0.7" />
 
     <ImageView
         android:id="@+id/noItemsImageView"
         android:layout_width="237dp"
         android:layout_height="250dp"
+        android:tint="#B2BEC3"
         android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
@@ -163,6 +175,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
+            android:onClick="basketClicked"
             app:srcCompat="@drawable/shopping_cart_white" />
 
         <ImageButton

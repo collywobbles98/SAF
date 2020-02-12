@@ -44,6 +44,11 @@ public class Profile extends AppCompatActivity {
 
          startActivity(new Intent(Profile.this, Selling.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
      }
+    //Basket Activity
+    public void basketClicked(View view){
+
+        startActivity(new Intent(Profile.this, basket.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
 
      public void testclicked (View view){
 
