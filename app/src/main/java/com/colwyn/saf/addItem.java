@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,8 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -56,8 +59,12 @@ public class addItem extends AppCompatActivity {
     EditText descriptionEditText;
     EditText brandEditText;
     RadioButton newrbtn, usedrbtn;
+    RadioButton GBPRadioButton, EURRadioButton, USDRadioButton, CADRadioButton, AUSRadioButton, JPYRadioButton;
     EditText priceEditText;
     EditText deliveryNotesEditText;
+    RadioGroup stockRadioGroup;
+    RadioButton unlimitedRadioButton, limitedRadioButton;
+    EditText stockEditText;
     //TextView urlTextView;
 
 
@@ -65,10 +72,6 @@ public class addItem extends AppCompatActivity {
     private Uri filepath;
     private final int PICK_IMAGE_REQUEST = 1;
     private StorageTask mUploadTask;
-
-
-
-
 
     //---Cancel Button---//
     public void cancelClicked (View view){
@@ -96,6 +99,26 @@ public class addItem extends AppCompatActivity {
             //Upload Image Method
             uploadImage();
 
+    }
+
+    //---Stock EditText Visibility---//
+    public void showstock (View view){
+        //Declare Widgets
+        stockRadioGroup = findViewById(R.id.stockRadioGroup);
+        unlimitedRadioButton = findViewById(R.id.unlimitedRadioButton);
+        limitedRadioButton = findViewById(R.id.limitedRadioButton);
+        stockEditText = findViewById(R.id.stockEditText);
+        //Show EditText
+        stockEditText.setVisibility(View.VISIBLE);
+    }
+    public void hidestock (View view){
+        //Declare Widgets
+        stockRadioGroup = findViewById(R.id.stockRadioGroup);
+        unlimitedRadioButton = findViewById(R.id.unlimitedRadioButton);
+        limitedRadioButton = findViewById(R.id.limitedRadioButton);
+        stockEditText = findViewById(R.id.stockEditText);
+        //Show EditText
+        stockEditText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -144,8 +167,21 @@ public class addItem extends AppCompatActivity {
 
             descriptionEditText = findViewById(R.id.descriptionEditText);
             brandEditText = findViewById(R.id.brandEditText);
+
+            GBPRadioButton = findViewById(R.id.GBPRadioButton);
+            EURRadioButton = findViewById(R.id.EURRadioButton);
+            USDRadioButton = findViewById(R.id.USDRadioButton);
+            CADRadioButton = findViewById(R.id.CADRadioButton);
+            AUSRadioButton = findViewById(R.id.AUDRadioButton);
+            JPYRadioButton = findViewById(R.id.JPYRadioButton);
+
+
             priceEditText = findViewById(R.id.priceEditText);
             deliveryNotesEditText = findViewById(R.id.deliveryNotesEditText);
+
+            unlimitedRadioButton = findViewById(R.id.unlimitedRadioButton);
+            limitedRadioButton = findViewById(R.id.limitedRadioButton);
+            stockEditText = findViewById(R.id.stockEditText);
 
             //Get ID of Item Clicked to run search
             String documentID = userData.userItemClicked_Global;
@@ -169,6 +205,8 @@ public class addItem extends AppCompatActivity {
                                 String FSDescription = document.getString("Description");
                                 String FSImageURL = document.getString("ImageURL");
                                 String FSCategory = document.getString("Category");
+                                String FSCurrency = document.getString("Currency");
+                                String FSStock = document.getString("Stock");
 
                                 //Display data
                                 titleEditText.setText(FSTitle);
@@ -244,6 +282,34 @@ public class addItem extends AppCompatActivity {
                                 }
                                 else if(FSCondition.equals("Used")){
                                     usedrbtn.setChecked(true);
+                                }
+
+                                if(FSCurrency.equals("GBP")){
+                                    GBPRadioButton.setChecked(true);
+                                }
+                                else if(FSCurrency.equals("EUR")){
+                                    EURRadioButton.setChecked(true);
+                                }
+                                else if(FSCurrency.equals("USD")){
+                                    USDRadioButton.setChecked(true);
+                                }
+                                else if(FSCurrency.equals("CAD")){
+                                    CADRadioButton.setChecked(true);
+                                }
+                                else if(FSCurrency.equals("AUS")){
+                                    AUSRadioButton.setChecked(true);
+                                }
+                                else if(FSCurrency.equals("JPY")){
+                                    JPYRadioButton.setChecked(true);
+                                }
+
+                                if(FSStock.equals("unlimited")){
+                                    unlimitedRadioButton.setChecked(true);
+                                }
+                                else{
+                                    limitedRadioButton.setChecked(true);
+                                    stockEditText.setVisibility(View.VISIBLE);
+                                    stockEditText.setText(FSStock);
                                 }
 
                                 //Hide Choose Button 2
@@ -367,7 +433,6 @@ public class addItem extends AppCompatActivity {
     private void savedata(){
 
         //---Save Item to Firestore (Database)---//
-
         //---Get Widgets---//
         titleEditText = findViewById(R.id.titleEditText);
         //radiobuttons
@@ -395,6 +460,13 @@ public class addItem extends AppCompatActivity {
         newrbtn = findViewById(R.id.newrbtn);
         usedrbtn = findViewById(R.id.usedrbtn);
 
+        GBPRadioButton = findViewById(R.id.GBPRadioButton);
+        EURRadioButton = findViewById(R.id.EURRadioButton);
+        USDRadioButton = findViewById(R.id.USDRadioButton);
+        CADRadioButton = findViewById(R.id.CADRadioButton);
+        AUSRadioButton = findViewById(R.id.AUDRadioButton);
+        JPYRadioButton = findViewById(R.id.JPYRadioButton);
+
         descriptionEditText = findViewById(R.id.descriptionEditText);
         brandEditText = findViewById(R.id.brandEditText);
         priceEditText = findViewById(R.id.priceEditText);
@@ -407,6 +479,7 @@ public class addItem extends AppCompatActivity {
         String price = priceEditText.getText().toString().trim();
         String deliverynotes = deliveryNotesEditText.getText().toString().trim();
         String downloadurl = userData.downloadurl_Global;
+
 
 
 
@@ -490,6 +563,53 @@ public class addItem extends AppCompatActivity {
             condition = null;
         }
 
+        //Currency Radio Buttons
+        String currency;
+        String symbol;
+        if(GBPRadioButton.isChecked()){
+            currency = "GBP";
+            symbol = "£";
+        }
+        else if(EURRadioButton.isChecked()){
+            currency = "EUR";
+            symbol = "€";
+        }
+        else if(USDRadioButton.isChecked()){
+            currency = "USD";
+            symbol = "$";
+        }
+        else if(CADRadioButton.isChecked()){
+            currency = "CAD";
+            symbol = "$";
+        }
+        else if(AUSRadioButton.isChecked()){
+            currency = "AUS";
+            symbol = "$";
+        }
+        else if(JPYRadioButton.isChecked()){
+            currency = "JPY";
+            symbol = "¥";
+        }
+        else{
+            currency = null;
+            symbol = null;
+        }
+
+        //Stock
+        String stock;
+        if(unlimitedRadioButton.isChecked()){
+            stock = "unlimited";
+        }
+        else if (limitedRadioButton.isChecked()){
+            stock = stockEditText.getText().toString().trim();
+        }
+        else{ //No Selection Made, give error
+            Toast.makeText(addItem.this, "Please Enter the stock of your item.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+
+
 
         //---Check all fields have been filled in---//
         if (TextUtils.isEmpty(title)) {
@@ -512,6 +632,10 @@ public class addItem extends AppCompatActivity {
             Toast.makeText(addItem.this, "Please tell us the condition of the item.", Toast.LENGTH_SHORT).show();
             return;
         }
+        if (TextUtils.isEmpty(currency)) {
+            Toast.makeText(addItem.this, "Please use a currency", Toast.LENGTH_SHORT).show();
+            return;
+        }
         if (TextUtils.isEmpty(price)) {
             Toast.makeText(addItem.this, "Please enter the price of your item.", Toast.LENGTH_SHORT).show();
             return;
@@ -520,6 +644,11 @@ public class addItem extends AppCompatActivity {
             Toast.makeText(addItem.this, "Please describe your delivery policies.", Toast.LENGTH_SHORT).show();
             return;
         }
+
+
+        //Timestamp
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String format = simpleDateFormat.format(new Date());
 
 
         //---Get userid & email---//
@@ -535,9 +664,13 @@ public class addItem extends AppCompatActivity {
             listings.put("Description", description);
             listings.put("Brand", brand);
             listings.put("Condition", condition);
+            listings.put("Currency", currency);
+            listings.put("Symbol", symbol);
             listings.put("Price", price);
             listings.put("Delivery_Notes", deliverynotes);
             listings.put("ImageURL", downloadurl);
+            listings.put("TimeStamp", format);
+            listings.put("Stock", stock);
 
 
             // Add a new document with a generated ID
@@ -572,8 +705,13 @@ public class addItem extends AppCompatActivity {
             listings.put("Description", description);
             listings.put("Brand", brand);
             listings.put("Condition", condition);
+            listings.put("Currency", currency);
+            listings.put("Symbol", symbol);
             listings.put("Price", price);
             listings.put("Delivery_Notes", deliverynotes);
+            listings.put("TimeStamp", format);
+            listings.put("Stock", stock);
+
             if(downloadurl != null) {
                 listings.put("ImageURL", downloadurl);
             }

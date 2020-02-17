@@ -25,6 +25,11 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+
 public class listingView extends AppCompatActivity {
 
     //---Firestore---//
@@ -32,8 +37,8 @@ public class listingView extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //---Declare Widgets---//
-    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView;
-    ImageView itemImageView;
+    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, postedTextView;
+    ImageView itemImageView, newImageView;
 
     private AlertDialog AskOption()
     {
@@ -103,9 +108,12 @@ public class listingView extends AppCompatActivity {
         brandTextView = findViewById(R.id.brandTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
         itemImageView = findViewById(R.id.itemImageView);
+        postedTextView = findViewById(R.id.postedTextView);
+        newImageView = findViewById(R.id.newImageView);
+
 
         //Get ID of Item Clicked to run search
-        String documentID = userData.userItemClicked_Global;
+        final String documentID = userData.userItemClicked_Global;
 
         //Get Data from Firestore
         try{
@@ -126,14 +134,45 @@ public class listingView extends AppCompatActivity {
                             String FSBrand = document.getString("Brand");
                             String FSDescription = document.getString("Description");
                             String FSImageURL = document.getString("ImageURL");
+                            String FSCurrency = document.getString("Currency");
+                            String FSSymbol = document.getString("Symbol");
+                            String FSTimeStamp = document.getString("TimeStamp");
 
                             //Display in edit texts
                             titleTextView.setText(FSTitle);
-                            priceTextView.setText(FSPrice);
+                            priceTextView.setText(FSSymbol + FSPrice + " " + FSCurrency);
                             deliveryTextView.setText(FSDelivery);
                             conditionTextView.setText(FSCondition);
                             brandTextView.setText(FSBrand);
                             descriptionTextView.setText(FSDescription);
+
+                            //---Get Days Since Posted---//
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            String inputString1 = FSTimeStamp;
+                            String inputString2 = simpleDateFormat.format(new Date());
+
+                            try {
+                                Date date1 = simpleDateFormat.parse(inputString1);
+                                Date date2 = simpleDateFormat.parse(inputString2);
+                                long diff = date2.getTime() - date1.getTime();
+                                //Display Days since posted
+                                postedTextView.setSingleLine(false);
+                                if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 0){
+                                    newImageView.setVisibility(View.VISIBLE);
+                                    postedTextView.setVisibility(View.INVISIBLE);
+                                }
+                                else if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 1){
+                                    newImageView.setVisibility(View.GONE);
+                                    postedTextView.setText("POSTED \n" + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " DAY AGO");
+                                }
+                                else{
+                                    newImageView.setVisibility(View.GONE);
+                                    postedTextView.setText("POSTED \n" + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " DAYS AGO");
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
 
                             //Display Photo
                             Picasso.get().load(FSImageURL).into(itemImageView);

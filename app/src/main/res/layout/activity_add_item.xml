@@ -58,7 +58,7 @@
                         android:id="@+id/photoTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Photo"
                         android:textSize="24sp"
@@ -83,9 +83,11 @@
 
                     <ImageView
                         android:id="@+id/itemImageView"
-                        android:layout_width="352dp"
+                        android:layout_width="0dp"
                         android:layout_height="285dp"
+                        android:layout_marginStart="45dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="45dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/photoTextView"
@@ -112,7 +114,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="150dp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -122,7 +124,7 @@
                         android:id="@+id/TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Title"
                         android:textSize="24sp"
@@ -132,12 +134,16 @@
 
                     <EditText
                         android:id="@+id/titleEditText"
-                        android:layout_width="375dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
                         android:layout_marginTop="5dp"
+                        android:layout_marginEnd="45dp"
+                        android:layout_marginBottom="15dp"
                         android:ems="10"
                         android:hint="Enter a title."
                         android:inputType="textPersonName"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/TextView" />
@@ -149,7 +155,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="713dp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -159,7 +165,7 @@
                         android:id="@+id/categortTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Category"
                         android:textSize="24sp"
@@ -168,8 +174,10 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <RadioGroup
-                        android:layout_width="167dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="645dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.47"
@@ -346,7 +354,7 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="356dp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -356,7 +364,7 @@
                         android:id="@+id/descriptionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Description"
                         android:textSize="24sp"
@@ -366,8 +374,10 @@
 
                     <EditText
                         android:id="@+id/descriptionEditText"
-                        android:layout_width="375dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginEnd="45dp"
                         android:ems="10"
                         android:hint="Item Description (100 characters min)"
                         android:inputType="textPersonName|textMultiLine"
@@ -379,7 +389,7 @@
                         android:id="@+id/catItemRowconditionTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="25dp"
                         android:text="Condition"
                         android:textSize="24sp"
@@ -389,8 +399,10 @@
 
                     <EditText
                         android:id="@+id/brandEditText"
-                        android:layout_width="375dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginEnd="45dp"
                         android:ems="10"
                         android:hint="Enter the brand of your item."
                         android:inputType="textPersonName"
@@ -402,7 +414,7 @@
                         android:id="@+id/catItemRowbrandTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="25dp"
                         android:text="Brand"
                         android:textSize="24sp"
@@ -411,8 +423,14 @@
                         app:layout_constraintTop_toBottomOf="@+id/descriptionEditText" />
 
                     <RadioGroup
-                        android:layout_width="77dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="100dp"
+                        android:layout_marginBottom="15dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/catItemRowconditionTextView">
@@ -421,12 +439,14 @@
                             android:id="@+id/newrbtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="New" />
 
                         <RadioButton
                             android:id="@+id/usedrbtn"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:layout_weight="1"
                             android:text="Used" />
                     </RadioGroup>
 
@@ -439,17 +459,17 @@
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="236dp">
+                android:layout_height="wrap_content">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="230dp">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/PriceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Price"
                         android:textSize="24sp"
@@ -457,13 +477,72 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
+                    <RadioGroup
+                        android:id="@+id/radioGroup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="25dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/priceEditText">
+
+                        <RadioButton
+                            android:id="@+id/GBPRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="GBP" />
+
+                        <RadioButton
+                            android:id="@+id/EURRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="EUR" />
+
+                        <RadioButton
+                            android:id="@+id/USDRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="USD" />
+
+                        <RadioButton
+                            android:id="@+id/CADRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="CAD" />
+
+                        <RadioButton
+                            android:id="@+id/AUDRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="AUD" />
+
+                        <RadioButton
+                            android:id="@+id/JPYRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="JPY" />
+
+                    </RadioGroup>
+
                     <EditText
                         android:id="@+id/priceEditText"
-                        android:layout_width="375dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="45dp"
                         android:ems="10"
-                        android:hint="Include Currency With your price."
-                        android:inputType="textPersonName"
+                        android:hint="Advertised Price"
+                        android:inputType="numberDecimal"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/PriceTextView" />
@@ -472,30 +551,106 @@
                         android:id="@+id/deliveryNotesTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
+                        android:layout_marginStart="25dp"
                         android:layout_marginTop="25dp"
                         android:text="Delivery Notes"
                         android:textSize="24sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/priceEditText" />
+                        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
                     <EditText
                         android:id="@+id/deliveryNotesEditText"
-                        android:layout_width="375dp"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginEnd="45dp"
+                        android:layout_marginBottom="15dp"
                         android:ems="10"
                         android:hint="Delivery info."
                         android:inputType="textPersonName|textMultiLine"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/deliveryNotesTextView" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="15dp"
+                        android:text="Stock"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <RadioGroup
+                        android:id="@+id/stockRadioGroup"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="100dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="100dp"
+                        android:orientation="horizontal"
+                        android:paddingBottom="15dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView3">
+
+                        <RadioButton
+                            android:id="@+id/unlimitedRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:onClick="hidestock"
+                            android:text="Unlimted" />
+
+                        <RadioButton
+                            android:id="@+id/limitedRadioButton"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:checked="false"
+                            android:onClick="showstock"
+                            android:text="Limited" />
+                    </RadioGroup>
+
+                    <EditText
+                        android:id="@+id/stockEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="110dp"
+                        android:layout_marginEnd="110dp"
+                        android:layout_marginBottom="15dp"
+                        android:ems="10"
+                        android:hint="Amount"
+                        android:inputType="number"
+                        android:visibility="invisible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/stockRadioGroup" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -506,28 +661,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="#f1f1f1">
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/cancelbtn2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
-                        android:onClick="cancelClicked"
-                        app:backgroundTint="#FF5A5F"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_cancel_black_24dp" />
-
-                    <com.google.android.material.floatingactionbutton.FloatingActionButton
-                        android:id="@+id/uploadbtn2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="25dp"
-                        android:onClick="uploadClicked"
-                        app:backgroundTint="#FF5A5F"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_check_circle_white_34" />
 
                     <TextView
                         android:id="@+id/urlTextView"
@@ -544,5 +677,31 @@
 
         </LinearLayout>
     </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cancelbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="cancelClicked"
+        app:backgroundTint="#FF5A5F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_cancel_black_24dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/uploadbtn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="25dp"
+        android:layout_marginBottom="15dp"
+        android:onClick="uploadClicked"
+        app:backgroundTint="#FF5A5F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_check_circle_white_34" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
