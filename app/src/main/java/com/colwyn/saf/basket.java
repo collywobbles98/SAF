@@ -60,6 +60,11 @@ public class basket extends AppCompatActivity {
         startActivity(new Intent(basket.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
+    //Checkout Button
+    public void checkoutClicked(View view){
+        startActivity(new Intent(basket.this, paymentdetails.class));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

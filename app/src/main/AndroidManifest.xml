@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".basket"></activity>
+        <activity android:name=".paymentdetails"></activity>
+        <activity android:name=".basket" />
         <activity android:name=".CatListingView" />
         <activity
             android:name=".listingView"

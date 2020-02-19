@@ -77,6 +77,7 @@
                 android:layout_marginBottom="5dp"
                 android:layout_weight="1"
                 android:backgroundTint="#f39c12"
+                android:onClick="checkoutClicked"
                 android:text="Proceed to Checkout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

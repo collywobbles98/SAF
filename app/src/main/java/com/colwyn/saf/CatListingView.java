@@ -100,7 +100,7 @@ public class CatListingView extends AppCompatActivity {
         conditionTextView = findViewById(R.id.conditionTextView);
         brandTextView = findViewById(R.id.brandTextView);
         descriptionTextView = findViewById(R.id.descriptionTextView);
-        nameTextView = findViewById(R.id.nameTextView);
+        nameTextView = findViewById(R.id.disCardNameTextView);
         locationTextView = findViewById(R.id.locationTextView);
         numberTextView = findViewById(R.id.numberTextView);
         emailTextView = findViewById(R.id.emailTextView);
