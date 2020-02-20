@@ -24,4 +24,7 @@ public class userData {
     public static String itemSeller_Global;
     public static String imageURLBasket_Global;
 
+    //Test Variable
+    public static String test_Global;
+
 }

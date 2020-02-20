@@ -8,10 +8,14 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+
+import com.colwyn.saf.model.encryption;
 
 public class paymentdetails extends AppCompatActivity {
 
@@ -20,11 +24,15 @@ public class paymentdetails extends AppCompatActivity {
     EditText num1EditText, num2EditText, num3EditText, num4EditText, nameEditText, monthEditText, yearEditText, ccvEditText;
     Button confirmButton, cancelButton, layoutFillerButton;
     CardView mainCardView, ccvCardView;
+    ProgressBar paymentProgressBar;
 
     //---Cancel Button---//
     public void cancelClicked(View view){
         startActivity(new Intent(paymentdetails.this, basket.class));
     }
+
+    //Encryption Variables
+    String outputString;
 
 
     @Override
@@ -71,6 +79,12 @@ public class paymentdetails extends AppCompatActivity {
         disYearTextView.setVisibility(View.INVISIBLE);
         slashTextView.setVisibility(View.INVISIBLE);
 
+        //Get progress Bar
+        paymentProgressBar = findViewById(R.id.paymentProgressBar);
+        paymentProgressBar.setVisibility(View.VISIBLE);
+
+
+
         //---Fill Card With Entered data---//
         //First Number Set
         num1EditText.addTextChangedListener(new TextWatcher() {
@@ -87,6 +101,8 @@ public class paymentdetails extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
+
+                //Save Number to variable
 
                 //Display Card Type when data is entered
                 try{
@@ -306,6 +322,173 @@ public class paymentdetails extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
             }
         });
+
+
+        //Confirm Button
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //---Check Form has been filled in---//
+                //Number1
+                if(TextUtils.isEmpty(num1EditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (num1EditText.getText().length() == 4){
+                    String num1 = num1EditText.getText().toString().trim();
+                    //Encrpt
+                    String num1encrypted; //result
+                    try {
+                        num1encrypted = encryption.encrypt(num1);
+                        //Toast.makeText(paymentdetails.this, num1encrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Number 2
+                if(TextUtils.isEmpty(num2EditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (num2EditText.getText().length() == 4){
+                    String num2 = num2EditText.getText().toString().trim();
+                    //Encrpt
+                    String num2encrypted; //result
+                    try {
+                        num2encrypted = encryption.encrypt(num2);
+                        //Toast.makeText(paymentdetails.this, num2encrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Number 3
+                if(TextUtils.isEmpty(num3EditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (num3EditText.getText().length() == 4){
+                    String num3 = num3EditText.getText().toString().trim();
+                    //Encrpt
+                    String num3encrypted; //result
+                    try {
+                        num3encrypted = encryption.encrypt(num3);
+                        //Toast.makeText(paymentdetails.this, num3encrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Number 4
+                if(TextUtils.isEmpty(num4EditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (num4EditText.getText().length() == 4){
+                    String num4 = num4EditText.getText().toString().trim();
+                    //Encrpt
+                    String num4encrypted; //result
+                    try {
+                        num4encrypted = encryption.encrypt(num4);
+                        //Toast.makeText(paymentdetails.this, num4encrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Name
+                if(TextUtils.isEmpty(nameEditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter the cardholders name", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else{
+                    String name = nameEditText.getText().toString().trim();
+                }
+                //Expiration Month
+                if(TextUtils.isEmpty(monthEditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter the month of expiry", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (monthEditText.getText().length() == 2){
+                    String month = monthEditText.getText().toString().trim();
+                    //Encrpt
+                    String monthencrypted; //result
+                    try {
+                        monthencrypted = encryption.encrypt(month);
+                        //Toast.makeText(paymentdetails.this, monthencrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your expiry month", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //Expiration Year
+                if(TextUtils.isEmpty(yearEditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter the year of expiry", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (yearEditText.getText().length() == 2){
+                    String year = yearEditText.getText().toString().trim();
+                    //Encrpt
+                    String yearencrypted; //result
+                    try {
+                        yearencrypted = encryption.encrypt(year);
+                        //Toast.makeText(paymentdetails.this, yearencrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check your expiry year", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //CCV
+                if(TextUtils.isEmpty(ccvEditText.getText())){
+                    Toast.makeText(paymentdetails.this, "Please enter the CCV number on the back of your card", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (ccvEditText.getText().length() == 3){
+                    String ccv = ccvEditText.getText().toString().trim();
+                    //Encrpt
+                    String ccvencrypted; //result
+                    try {
+                        ccvencrypted = encryption.encrypt(ccv);
+                        //Toast.makeText(paymentdetails.this, ccvencrypted, Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+
+                    }
+                }
+                else{
+                    Toast.makeText(paymentdetails.this, "Please check the CCV number on the back of your card", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //---Save Data to firebase---//
+                //Show Progress Bar
+                paymentProgressBar.setVisibility(View.VISIBLE);
+
+
+
+
+            }
+        });
+
 
 
 
