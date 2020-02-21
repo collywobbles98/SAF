@@ -24,6 +24,19 @@ public class userData {
     public static String itemSeller_Global;
     public static String imageURLBasket_Global;
 
+    //Order Proccess
+    public static String cardtype_Global;
+    public static String encryptednum1_Global;
+    public static String encryptednum2_Global;
+    public static String encryptednum3_Global;
+    public static String encryptednum4_Global;
+    public static String cardholdername_Global;
+    public static String encryptedmonth_Global;
+    public static String encryptedyear_Global;
+    public static String encryptedccv_Global;
+
+
+
     //Test Variable
     public static String test_Global;
 

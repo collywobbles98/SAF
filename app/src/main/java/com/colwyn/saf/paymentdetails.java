@@ -1,5 +1,6 @@
 package com.colwyn.saf;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -12,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -19,12 +21,41 @@ import com.colwyn.saf.model.encryption;
 
 public class paymentdetails extends AppCompatActivity {
 
+
     //--Declare Widgets--//
     TextView disCardNum1TextView, disCardNum2TextView, disCardNum3TextView, disCardNum4TextView, disCardNameTextView, cardTypeTextView, disMonthTextView, disYearTextView, slashTextView, ccvTextView;
     EditText num1EditText, num2EditText, num3EditText, num4EditText, nameEditText, monthEditText, yearEditText, ccvEditText;
     Button confirmButton, cancelButton, layoutFillerButton;
     CardView mainCardView, ccvCardView;
     ProgressBar paymentProgressBar;
+
+    //---Info Button---//
+
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("About your data")
+                .setMessage("At SAF your data is encrypted and stored securely until your order has been fufilled, then it is destroyed. We do not store or keep your data any longer than is necessary.")
+                .setIcon(R.drawable.ic_delete_forever_black_24dp)
+
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        dialog.dismiss();
+
+                    }
+
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+    public void infoClicked(View view){
+        AlertDialog diaBox = AskOption();
+        diaBox.show();
+    }
 
     //---Cancel Button---//
     public void cancelClicked(View view){
@@ -81,7 +112,7 @@ public class paymentdetails extends AppCompatActivity {
 
         //Get progress Bar
         paymentProgressBar = findViewById(R.id.paymentProgressBar);
-        paymentProgressBar.setVisibility(View.VISIBLE);
+        paymentProgressBar.setVisibility(View.GONE);
 
 
 
@@ -114,29 +145,34 @@ public class paymentdetails extends AppCompatActivity {
                     if (cardType.startsWith("5")){
 
                         cardTypeTextView.setText("MASTERCARD");
+                        userData.cardtype_Global = "MASTERCARD";
 
                     }
 
                     else if (cardType.startsWith("4")){
 
                         cardTypeTextView.setText("VISA");
+                        userData.cardtype_Global = "VISA";
 
                     }
 
                     else if (cardType.startsWith("3")){
 
                         cardTypeTextView.setText("TRAVEL");
+                        userData.cardtype_Global = "TRAVEL";
 
                     }
 
                     else if (cardType.startsWith("6")){
 
                         cardTypeTextView.setText("DISCOVER");
+                        userData.cardtype_Global = "DISCOVER";
 
                     }
 
                     else {
                         cardTypeTextView.setText("UNKNOWN");
+                        userData.cardtype_Global = "UNKNOWN";
                     }
 
                 }
@@ -330,6 +366,9 @@ public class paymentdetails extends AppCompatActivity {
             public void onClick(View v) {
 
                 //---Check Form has been filled in---//
+                //Show Progress Bar
+                paymentProgressBar.setVisibility(View.VISIBLE);
+
                 //Number1
                 if(TextUtils.isEmpty(num1EditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
@@ -341,6 +380,7 @@ public class paymentdetails extends AppCompatActivity {
                     String num1encrypted; //result
                     try {
                         num1encrypted = encryption.encrypt(num1);
+                        userData.encryptednum1_Global = num1encrypted;
                         //Toast.makeText(paymentdetails.this, num1encrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -361,6 +401,7 @@ public class paymentdetails extends AppCompatActivity {
                     String num2encrypted; //result
                     try {
                         num2encrypted = encryption.encrypt(num2);
+                        userData.encryptednum2_Global = num2encrypted;
                         //Toast.makeText(paymentdetails.this, num2encrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -381,6 +422,7 @@ public class paymentdetails extends AppCompatActivity {
                     String num3encrypted; //result
                     try {
                         num3encrypted = encryption.encrypt(num3);
+                        userData.encryptednum3_Global = num3encrypted;
                         //Toast.makeText(paymentdetails.this, num3encrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -401,6 +443,7 @@ public class paymentdetails extends AppCompatActivity {
                     String num4encrypted; //result
                     try {
                         num4encrypted = encryption.encrypt(num4);
+                        userData.encryptednum4_Global = num4encrypted;
                         //Toast.makeText(paymentdetails.this, num4encrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -417,6 +460,7 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     String name = nameEditText.getText().toString().trim();
+                    userData.cardholdername_Global = name;
                 }
                 //Expiration Month
                 if(TextUtils.isEmpty(monthEditText.getText())){
@@ -429,6 +473,7 @@ public class paymentdetails extends AppCompatActivity {
                     String monthencrypted; //result
                     try {
                         monthencrypted = encryption.encrypt(month);
+                        userData.encryptedmonth_Global = monthencrypted;
                         //Toast.makeText(paymentdetails.this, monthencrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -449,6 +494,7 @@ public class paymentdetails extends AppCompatActivity {
                     String yearencrypted; //result
                     try {
                         yearencrypted = encryption.encrypt(year);
+                        userData.encryptedyear_Global = yearencrypted;
                         //Toast.makeText(paymentdetails.this, yearencrypted, Toast.LENGTH_SHORT).show();
                     } catch (Exception e) {
 
@@ -469,7 +515,9 @@ public class paymentdetails extends AppCompatActivity {
                     String ccvencrypted; //result
                     try {
                         ccvencrypted = encryption.encrypt(ccv);
+                        userData.encryptedccv_Global = ccvencrypted;
                         //Toast.makeText(paymentdetails.this, ccvencrypted, Toast.LENGTH_SHORT).show();
+
                     } catch (Exception e) {
 
                     }
@@ -479,20 +527,11 @@ public class paymentdetails extends AppCompatActivity {
                     return;
                 }
 
-                //---Save Data to firebase---//
-                //Show Progress Bar
-                paymentProgressBar.setVisibility(View.VISIBLE);
-
-
-
+                //---Take user to next activity---//
+                startActivity(new Intent(paymentdetails.this, confirmorder.class));
 
             }
         });
-
-
-
-
-
 
     }
 }
