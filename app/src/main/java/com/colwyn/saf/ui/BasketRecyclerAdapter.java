@@ -49,7 +49,10 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
         //Display Data
         viewHolder.title.setText(basketItem.getTitle());
         viewHolder.price.setText(basketItem.getPrice());
-        viewHolder.delivery_Notes.setText("Delivery: " + basketItem.getDelivery_Notes());
+        viewHolder.symbol.setText(basketItem.getSymbol());
+        viewHolder.currency.setText(" " + basketItem.getCurrency());
+        viewHolder.quantity.setText(basketItem.getQuantity());
+
 
         imageURL = basketItem.getImageURL();
         Picasso.get().load(imageURL).placeholder(R.drawable.ic_add_a_photo_black_24dp).fit().into(viewHolder.image);
@@ -84,7 +87,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Widgets
-        public TextView title,  price, delivery_Notes;
+        public TextView title,  price, symbol, currency, quantity;
         public ImageView image;
         String UserID;
 
@@ -97,7 +100,9 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
             title = itemView.findViewById(R.id.basketTitleTextView);
             image = itemView.findViewById(R.id.basketImageView);
             price = itemView.findViewById(R.id.basketPriceTextView);
-            delivery_Notes = itemView.findViewById(R.id.basketDeliveryTextView);
+            symbol = itemView.findViewById(R.id.basketSymbolTextView);
+            currency = itemView.findViewById(R.id.basketCurrencyTextView);
+            quantity = itemView.findViewById(R.id.basketQuantityTextView);
 
 
 

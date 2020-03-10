@@ -14,6 +14,10 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar7">
 
             <LinearLayout
@@ -33,7 +37,7 @@
 
                         <ImageView
                             android:id="@+id/itemImageView"
-                            android:layout_width="0dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="200dp"
                             android:layout_marginTop="5dp"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -88,7 +92,7 @@
                             android:layout_marginTop="10dp"
                             android:layout_marginEnd="25dp"
                             android:text="Posted"
-                            android:textAlignment="center"
+                            android:textAlignment="textEnd"
                             android:textColor="#0984E3"
                             android:textSize="16sp"
                             android:textStyle="bold"
@@ -105,6 +109,19 @@
                             app:layout_constraintTop_toTopOf="@+id/itemImageView"
                             app:srcCompat="@drawable/newimage"
                             tools:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/stockTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="25dp"
+                            android:text="Stock"
+                            android:textSize="18sp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/itemImageView" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.cardview.widget.CardView>
@@ -136,6 +153,7 @@
                             android:layout_marginTop="15dp"
                             android:text="Condition:"
                             android:textSize="16sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -147,6 +165,7 @@
                             android:layout_marginTop="15dp"
                             android:text="Brand:"
                             android:textSize="16sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView25" />
 
@@ -158,6 +177,7 @@
                             android:layout_marginTop="15dp"
                             android:text="Description:"
                             android:textSize="16sp"
+                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@+id/textView26" />
 
@@ -169,7 +189,6 @@
                             android:layout_marginTop="15dp"
                             android:text="Condition"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/textView25"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -181,7 +200,6 @@
                             android:layout_marginTop="15dp"
                             android:text="Brand"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             app:layout_constraintStart_toStartOf="@+id/textView26"
                             app:layout_constraintTop_toBottomOf="@+id/conditionTextView" />
 
@@ -195,7 +213,6 @@
                             android:paddingBottom="25dp"
                             android:text="Description"
                             android:textSize="16sp"
-                            android:textStyle="bold"
                             app:layout_constraintTop_toBottomOf="@+id/textView28"
                             tools:layout_editor_absoluteX="339dp" />
                     </androidx.constraintlayout.widget.ConstraintLayout>

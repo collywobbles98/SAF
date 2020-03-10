@@ -445,6 +445,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:backgroundTint="#FF5A5F"
+            android:onClick="cancelClicked"
             android:text="@android:string/cancel"
             android:textColor="#FFFFFF"
             android:textSize="15sp"

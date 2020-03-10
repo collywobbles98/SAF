@@ -51,7 +51,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
 
         //Display Data
         viewHolder.title.setText(userItem.getTitle());
-        viewHolder.category.setText("Category: " + userItem.getCategory());
+        viewHolder.stock.setText("Stock: " + userItem.getStock());
         viewHolder.brand.setText("Brand: " +userItem.getBrand());
 
 
@@ -90,7 +90,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //Widgets
-        public TextView title, category, description, brand, condition, price, currency, symbol, delivery_Notes, userID;
+        public TextView title, category, description, brand, condition, price, currency, symbol, delivery_Notes, userID, stock;
         public ImageView image;
         String UserID;
 
@@ -102,7 +102,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
             //Get Widgets
             title = itemView.findViewById(R.id.ItemRowTextView);
             image = itemView.findViewById(R.id.ItemRowImageView);
-            category = itemView.findViewById(R.id.ItemRowCatTextView);
+            stock = itemView.findViewById(R.id.ItemRowStockTextView);
             brand = itemView.findViewById(R.id.ItemRowBraTextView);
             price = itemView.findViewById(R.id.ItemRowPriTextView);
 

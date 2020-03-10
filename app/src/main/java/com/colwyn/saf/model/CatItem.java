@@ -9,6 +9,8 @@ public class CatItem extends ItemDocID {
     private String Brand;
     private String Condition;
     private String Price;
+    private String Currency;
+    private String Symbol;
     private String Delivery_Notes;
     private String UserID;
 
@@ -16,7 +18,7 @@ public class CatItem extends ItemDocID {
     public CatItem() {
     }
 
-    public CatItem(String imageURL, String title, String category, String description, String brand, String condition, String price, String delivery_Notes, String userID) {
+    public CatItem(String imageURL, String title, String category, String description, String brand, String condition, String price, String currency, String symbol, String delivery_Notes, String userID) {
         ImageURL = imageURL;
         Title = title;
         Category = category;
@@ -24,6 +26,8 @@ public class CatItem extends ItemDocID {
         Brand = brand;
         Condition = condition;
         Price = price;
+        Currency = currency;
+        Symbol = symbol;
         Delivery_Notes = delivery_Notes;
         UserID = userID;
     }
@@ -31,7 +35,6 @@ public class CatItem extends ItemDocID {
     public String getTitle() {
         return Title;
     }
-
     public void setTitle(String title) {
         Title = title;
     }
@@ -39,15 +42,19 @@ public class CatItem extends ItemDocID {
     public String getPrice() {
         return Price;
     }
-
     public void setPrice(String price) {
         Price = price;
     }
 
+    public String getCurrency() { return Currency; }
+    public void setCurrency(String currency) { Currency = currency; }
+
+    public String getSymbol() { return Symbol; }
+    public void setSymbol(String symbol) { Symbol = symbol; }
+
     public String getImageURL() {
         return ImageURL;
     }
-
     public void setImageURL(String imageURL) {
         ImageURL = imageURL;
     }
@@ -55,7 +62,6 @@ public class CatItem extends ItemDocID {
     public String getCondition() {
         return Condition;
     }
-
     public void setCondition(String condition) {
         Condition = condition;
     }
@@ -63,7 +69,6 @@ public class CatItem extends ItemDocID {
     public String getBrand() {
         return Brand;
     }
-
     public void setBrand(String brand) {
         Brand = brand;
     }
@@ -71,7 +76,6 @@ public class CatItem extends ItemDocID {
     public String getCategory() {
         return Category;
     }
-
     public void setCategory(String category) {
         Category = category;
     }
@@ -79,7 +83,6 @@ public class CatItem extends ItemDocID {
     public String getDescription() {
         return Description;
     }
-
     public void setDescription(String description) {
         Description = description;
     }
@@ -87,7 +90,6 @@ public class CatItem extends ItemDocID {
     public String getDelivery_Notes() {
         return Delivery_Notes;
     }
-
     public void setDelivery_Notes(String delivery_Notes) {
         Delivery_Notes = delivery_Notes;
     }
@@ -95,9 +97,6 @@ public class CatItem extends ItemDocID {
     public String getUserID() {
         return UserID;
     }
-
-    public void setUserID(String userID) {
-        UserID = userID;
-    }
+    public void setUserID(String userID) { UserID = userID; }
 
 }

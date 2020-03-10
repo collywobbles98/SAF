@@ -45,6 +45,8 @@
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,24 +67,25 @@
 
                     <ImageView
                         android:id="@+id/catItemImageView"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="200dp"
                         android:layout_marginTop="5dp"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="1.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:srcCompat="@color/colorAccent" />
 
                     <TextView
                         android:id="@+id/titleTextView"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="10dp"
+                        android:layout_marginEnd="45dp"
                         android:text="Title"
                         android:textSize="24sp"
                         android:textStyle="bold"
+                        app:layout_constraintEnd_toStartOf="@+id/postedTextView"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/catItemImageView" />
 
@@ -90,12 +93,11 @@
                         android:id="@+id/priceTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="25dp"
                         android:layout_marginTop="15dp"
                         android:text="Price"
                         android:textSize="22sp"
                         android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/symbolTextView"
                         app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
 
                     <TextView
@@ -110,6 +112,144 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/priceTextView" />
 
+                    <TextView
+                        android:id="@+id/symbolTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="15dp"
+                        android:text="Symbol"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+                    <TextView
+                        android:id="@+id/currencyTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:text="Currency"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toEndOf="@+id/priceTextView"
+                        app:layout_constraintTop_toBottomOf="@+id/titleTextView" />
+
+                    <TextView
+                        android:id="@+id/postedTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="25dp"
+                        android:text="Posted"
+                        android:textAlignment="textEnd"
+                        android:textColor="#0984E3"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/catItemImageView" />
+
+                    <ImageView
+                        android:id="@+id/newImageView"
+                        android:layout_width="143dp"
+                        android:layout_height="126dp"
+                        android:layout_marginTop="50dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/catItemImageView"
+                        app:srcCompat="@drawable/newimage"
+                        tools:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/stockTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="25dp"
+                        android:text="Stock"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/catItemImageView" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                app:contentPaddingBottom="10dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/textView40"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="25dp"
+                        android:layout_marginTop="10dp"
+                        android:text="Quantity: "
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="@+id/decreaseButton"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/decreaseButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginStart="45dp"
+                        android:layout_marginTop="10dp"
+                        android:text="-"
+                        android:textSize="14sp"
+                        app:layout_constraintStart_toEndOf="@+id/textView40"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <Button
+                        android:id="@+id/increaseButton"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="45dp"
+                        android:text="+"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <EditText
+                        android:id="@+id/quantityEditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:layout_marginEnd="5dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:text="1"
+                        android:textAlignment="center"
+                        app:layout_constraintBottom_toBottomOf="@+id/decreaseButton"
+                        app:layout_constraintEnd_toStartOf="@+id/increaseButton"
+                        app:layout_constraintStart_toEndOf="@+id/decreaseButton"
+                        app:layout_constraintTop_toTopOf="@+id/decreaseButton" />
+
+                    <Button
+                        android:id="@+id/addToBasketButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_weight="1"
+                        android:backgroundTint="#0984E3"
+                        android:onClick="addtoBasketClicked"
+                        android:text="Add To Basket"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/quantityEditText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -118,7 +258,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:text="About this Item"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -140,6 +280,7 @@
                         android:layout_marginTop="15dp"
                         android:text="Condition:"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -151,7 +292,6 @@
                         android:layout_marginTop="15dp"
                         android:text="Condition"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/textView31"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -163,6 +303,7 @@
                         android:layout_marginTop="15dp"
                         android:text="Brand:"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView31" />
 
@@ -174,7 +315,6 @@
                         android:layout_marginTop="15dp"
                         android:text="Brand"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="@+id/textView33"
                         app:layout_constraintTop_toBottomOf="@+id/conditionTextView" />
 
@@ -186,6 +326,7 @@
                         android:layout_marginTop="15dp"
                         android:text="Description:"
                         android:textSize="16sp"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView33" />
 
@@ -199,7 +340,6 @@
                         android:paddingBottom="25dp"
                         android:text="Description"
                         android:textSize="16sp"
-                        android:textStyle="bold"
                         app:layout_constraintTop_toBottomOf="@+id/textView34"
                         tools:layout_editor_absoluteX="187dp" />
 
@@ -212,23 +352,6 @@
                 android:orientation="horizontal"
                 android:paddingTop="5dp">
 
-                <Button
-                    android:id="@+id/buyNowButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#f39c12"
-                    android:onClick="testclicked"
-                    android:text="Buy Now" />
-
-                <Button
-                    android:id="@+id/addToBasketButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#f39c12"
-                    android:onClick="addtoBasketClicked"
-                    android:text="Add To Basket" />
             </LinearLayout>
 
             <TextView
@@ -236,7 +359,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingStart="10dp"
-                android:paddingTop="15dp"
+                android:paddingTop="10dp"
                 android:text="About the Seller"
                 android:textSize="24sp"
                 android:textStyle="bold" />
@@ -302,6 +425,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
         </LinearLayout>
     </ScrollView>
 

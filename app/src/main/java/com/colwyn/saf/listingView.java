@@ -2,6 +2,7 @@ package com.colwyn.saf;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -44,10 +45,11 @@ public class listingView extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //---Declare Widgets---//
-    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, postedTextView;
+    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, postedTextView, stockTextView;
     ImageView itemImageView, newImageView;
     AnyChartView anyChartStock;
 
+    //---Delete DialogBox---//
     private AlertDialog AskOption()
     {
         AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
@@ -94,6 +96,30 @@ public class listingView extends AppCompatActivity {
         return myQuittingDialogBox;
     }
 
+    //---No Stock Dialogbox---//
+
+    private AlertDialog AskOption2()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("Stock Alert")
+                .setMessage("This item has been sold out. Please add more stock or delete this listing.")
+                .setIcon(R.drawable.ic_delete_forever_black_24dp)
+
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        dialog.dismiss();
+
+                    }
+
+                })
+                .create();
+
+        return myQuittingDialogBox;
+    }
+
     //Delete Button
     public void deleteClicked (View view){
         AlertDialog diaBox = AskOption();
@@ -117,6 +143,7 @@ public class listingView extends AppCompatActivity {
         descriptionTextView = findViewById(R.id.descriptionTextView);
         itemImageView = findViewById(R.id.itemImageView);
         postedTextView = findViewById(R.id.postedTextView);
+        stockTextView = findViewById(R.id.stockTextView);
         newImageView = findViewById(R.id.newImageView);
 
 
@@ -125,7 +152,6 @@ public class listingView extends AppCompatActivity {
 
         //Get Data from Firestore
         try{
-
             DocumentReference docRef = db.collection("listings").document(documentID);
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -145,10 +171,11 @@ public class listingView extends AppCompatActivity {
                             String FSCurrency = document.getString("Currency");
                             String FSSymbol = document.getString("Symbol");
                             String FSTimeStamp = document.getString("TimeStamp");
+                            String FSStock = document.getString("Stock");
 
                             //Display in edit texts
                             titleTextView.setText(FSTitle);
-                            priceTextView.setText(FSSymbol + FSPrice + " " + FSCurrency);
+                            priceTextView.setText(FSSymbol + FSPrice + " (" + FSCurrency + ")");
                             deliveryTextView.setText(FSDelivery);
                             conditionTextView.setText(FSCondition);
                             brandTextView.setText(FSBrand);
@@ -179,6 +206,30 @@ public class listingView extends AppCompatActivity {
                                 }
                             } catch (ParseException e) {
                                 e.printStackTrace();
+                            }
+
+                            //Display Stock
+                            if(FSStock.equals("unlimited")){
+                                stockTextView.setText("Available");
+                                stockTextView.setTextColor(Color.parseColor("#53d769"));
+                            }
+                            else {
+                                int stockNum = Integer.parseInt(FSStock);
+                                if (stockNum >= 10) {
+                                    stockTextView.setText(stockNum + " Available");
+                                    stockTextView.setTextColor(Color.parseColor("#53d769"));
+                                } else if (stockNum < 10 && stockNum > 0) {
+                                    stockTextView.setText("Only " + stockNum + " Remaining");
+                                    stockTextView.setTextColor(Color.parseColor("#fd9426"));
+                                } else {
+                                    stockTextView.setText("Sold Out");
+                                    stockTextView.setTextColor(Color.parseColor("#fc3d39"));
+
+                                    //Alert User to Delete or Edit Item.
+                                    AlertDialog diaBox = AskOption2();
+                                    diaBox.show();
+
+                                }
                             }
 
 

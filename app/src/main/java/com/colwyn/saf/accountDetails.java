@@ -89,6 +89,7 @@ public class accountDetails extends AppCompatActivity {
                             String FSCountyState = document.getString("County_State");
                             String FSCountry = document.getString("Country");
                             String FSPhoneNum = document.getString("Phone_Num");
+                            String FSCurrency = document.getString("Currency");
 
                             //---Display in edit texts ---//
                             txtFName.setText(FSFirstname);
@@ -102,6 +103,9 @@ public class accountDetails extends AppCompatActivity {
 
                             //--Display User Email---//
                             userEmailTextView.setText(userData.email_Global);
+
+                            //--Store Currency to be used in the save---//
+                            userData.currency_Global = FSCurrency;
 
 
                             //Hide progress bar and show data
@@ -158,6 +162,7 @@ public class accountDetails extends AppCompatActivity {
                 user.put("County_State", countyState);
                 user.put("Country", country);
                 user.put("Phone_Num", phoneNum);
+                user.put("Currency", userData.currency_Global);
 
 
                 db.collection("user").document(userID)

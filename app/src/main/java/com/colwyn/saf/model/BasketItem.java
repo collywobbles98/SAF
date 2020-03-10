@@ -7,21 +7,27 @@ public class BasketItem extends BasketDocID {
     private String ImageURL;
     private String Title;
     private String Price;
+    private String Symbol;
+    private String Currency;
     private String Delivery_Notes;
+    private String Quantity;
 
 
     //Empty Constructor for Firestore to Work
     public BasketItem() {
     }
 
-    public BasketItem(String item, String userID, String imageURL, String title, String price, String delivery_Notes) {
+    public BasketItem(String item, String userID, String imageURL, String title, String price, String symbol, String currency, String quantity, String delivery_Notes) {
 
         Item = item;
         UserID = userID;
         ImageURL = imageURL;
         Title = title;
         Price = price;
+        Symbol = symbol;
+        Currency = currency;
         Delivery_Notes = delivery_Notes;
+        quantity = quantity;
 
     }
 
@@ -44,6 +50,12 @@ public class BasketItem extends BasketDocID {
         Price = price;
     }
 
+    public String getCurrency() { return Currency; }
+    public void setCurrency(String currency) { Currency = currency; }
+
+    public String getSymbol() { return Symbol; }
+    public void setSymbol(String symbol) { Symbol = symbol; }
+
     public String getImageURL() {
         return ImageURL;
     }
@@ -62,5 +74,12 @@ public class BasketItem extends BasketDocID {
         return UserID;
     }
     public void setUserID(String userID) { UserID = userID; }
+
+    public String getQuantity() {
+        return Quantity;
+    }
+    public void setQuantity(String quantity) {
+        Quantity = quantity;
+    }
 
 }

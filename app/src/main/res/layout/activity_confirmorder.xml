@@ -79,18 +79,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <view
-                            android:id="@+id/view"
-                            android:layout_width="0dp"
-                            android:layout_height="1dp"
-                            android:layout_marginStart="5dp"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginEnd="5dp"
-                            android:background="#000000"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/textView49" />
-
                         <TextView
                             android:id="@+id/textView49"
                             android:layout_width="wrap_content"
@@ -111,19 +99,35 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
+                        <View
+                            android:id="@+id/divider"
+                            android:layout_width="0dp"
+                            android:layout_height="1dp"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginRight="5dp"
+                            android:background="#000000"
+                            app:layout_constraintBottom_toTopOf="@+id/editBasketButton"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/orderTotalTextView" />
+
                         <Button
-                            android:id="@+id/changeDeliveryButton3"
+                            android:id="@+id/editBasketButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_marginBottom="1dp"
                             android:background="#00FFFFFF"
+                            android:onClick="editBasketClicked"
                             android:padding="10dp"
-                            android:text="Change Delivery Address"
+                            android:text="EDIT BASKET"
                             android:textAlignment="textEnd"
                             android:textColor="#FF5A5F"
                             android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/view" />
+                            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -175,13 +179,13 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/deliveryNameTextView" />
 
-                    <view
-                        android:id="@+id/view2"
-                        android:layout_width="0dp"
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:layout_marginStart="5dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginRight="5dp"
                         android:background="#000000"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -193,6 +197,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
                         android:background="#00FFFFFF"
+                        android:onClick="changeAddressClicked"
                         android:padding="10dp"
                         android:text="Change Delivery Address"
                         android:textAlignment="textEnd"
@@ -201,7 +206,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view2" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider2" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
 
@@ -226,31 +231,33 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="5dp"
+                        android:background="#000000"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/cardTextView" />
+
                     <Button
                         android:id="@+id/changeCardButton"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:background="#00FFFFFF"
+                        android:onClick="changeCardClicked"
                         android:padding="10dp"
                         android:text="Change Card"
                         android:textAlignment="textEnd"
                         android:textColor="#FF5A5F"
                         android:textStyle="bold"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardTextView" />
-
-                    <view
-                        android:id="@+id/view4"
-                        android:layout_width="0dp"
-                        android:layout_height="1dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginEnd="5dp"
-                        android:background="#000000"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardTextView" />
+                        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
                     <TextView
                         android:id="@+id/cardTextView"
@@ -276,6 +283,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#FF5A5F"
+                android:onClick="returnClicked"
                 android:text="Return to Catalogue"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />

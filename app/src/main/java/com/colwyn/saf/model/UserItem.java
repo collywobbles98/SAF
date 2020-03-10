@@ -13,12 +13,13 @@ public class UserItem extends ItemDocID{
     private String Symbol;
     private String Delivery_Notes;
     private String UserID;
+    private String Stock;
 
     //Empty Constructor for Firestore to Work
     public UserItem() {
     }
 
-    public UserItem(String imageURL, String title, String category, String description, String brand, String condition, String price, String currency, String symbol, String delivery_Notes, String userID) {
+    public UserItem(String imageURL, String title, String category, String description, String brand, String condition, String price, String currency, String symbol, String delivery_Notes, String userID, String stock) {
         ImageURL = imageURL;
         Title = title;
         Category = category;
@@ -30,6 +31,7 @@ public class UserItem extends ItemDocID{
         Symbol = symbol;
         Delivery_Notes = delivery_Notes;
         UserID = userID;
+        Stock = stock;
     }
 
     public String getTitle() {
@@ -72,4 +74,7 @@ public class UserItem extends ItemDocID{
 
     public String getUserID() { return UserID; }
     public void setUserID(String userID) { UserID = userID; }
+
+    public String getStock() { return Stock; }
+    public void setStock(String stock) { Stock = stock; }
 }

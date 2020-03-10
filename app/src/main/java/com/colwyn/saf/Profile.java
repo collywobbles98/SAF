@@ -50,15 +50,17 @@ public class Profile extends AppCompatActivity {
         startActivity(new Intent(Profile.this, basket.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
-     public void testclicked (View view){
-
+     public void logoutClicked (View view){
          usernameTextView = findViewById(R.id.usernameTextView);
          usernameTextView.setText(userData.userID_Global);
-
          FirebaseAuth.getInstance().signOut();
          userData.userID_Global = null;
          startActivity(new Intent(Profile.this, LogIn.class));
+     }
 
+     public void CurrencyClicked (View view){
+         //Take user to edit details activity
+         startActivity(new Intent(Profile.this, currency.class));
      }
 
      public void personalDetailsClicked (View view){

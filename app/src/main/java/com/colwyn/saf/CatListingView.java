@@ -1,8 +1,11 @@
 package com.colwyn.saf;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,8 +24,12 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 public class CatListingView extends AppCompatActivity {
 
@@ -31,14 +38,18 @@ public class CatListingView extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //---Declare Widgets---//
-    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, nameTextView, locationTextView, numberTextView, emailTextView;
-    ImageView catItemImageView;
+    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, nameTextView, locationTextView, numberTextView, emailTextView, postedTextView, symbolTextView, currencyTextView, stockTextView;
+    ImageView catItemImageView, newImageView;
+    Button addToBasketButton, increaseButton, decreaseButton;
+    EditText quantityEditText;
+
 
     //---Nav---//
     public void backClicked (View view){
         //Take user back to catalogue and remove clicked Item Variable
         userData.catItemClicked_Global = null;
         userData.itemSeller_Global = null;
+        userData.itemStock_Global = null;
         startActivity(new Intent(CatListingView.this, MainActivity.class));
     }
 
@@ -49,6 +60,9 @@ public class CatListingView extends AppCompatActivity {
         titleTextView = findViewById(R.id.titleTextView);
         priceTextView = findViewById(R.id.priceTextView);
         deliveryTextView = findViewById(R.id.deliveryTextView);
+        symbolTextView = findViewById(R.id.symbolTextView);
+        currencyTextView = findViewById(R.id.currencyTextView);
+        quantityEditText = findViewById(R.id.quantityEditText);
 
         //Add item to users basket
 
@@ -58,7 +72,11 @@ public class CatListingView extends AppCompatActivity {
             basket_items.put("ImageURL", userData.imageURLBasket_Global);
             basket_items.put("Title", titleTextView.getText().toString().trim());
             basket_items.put("Price", priceTextView.getText().toString().trim());
+            basket_items.put("Symbol", symbolTextView.getText().toString().trim());
+            basket_items.put("Currency", currencyTextView.getText().toString().trim());
+            basket_items.put("Quantity", quantityEditText.getText().toString().trim());
             basket_items.put("Delivery_Notes", deliveryTextView.getText().toString().trim());
+
 
 
 
@@ -96,6 +114,8 @@ public class CatListingView extends AppCompatActivity {
         //Get Widgets
         titleTextView = findViewById(R.id.titleTextView);
         priceTextView = findViewById(R.id.priceTextView);
+        symbolTextView = findViewById(R.id.symbolTextView);
+        currencyTextView = findViewById(R.id.currencyTextView);
         deliveryTextView = findViewById(R.id.deliveryTextView);
         conditionTextView = findViewById(R.id.conditionTextView);
         brandTextView = findViewById(R.id.brandTextView);
@@ -104,8 +124,17 @@ public class CatListingView extends AppCompatActivity {
         locationTextView = findViewById(R.id.locationTextView);
         numberTextView = findViewById(R.id.numberTextView);
         emailTextView = findViewById(R.id.emailTextView);
+        postedTextView = findViewById(R.id.postedTextView);
+        stockTextView = findViewById(R.id.stockTextView);
 
+        newImageView = findViewById(R.id.newImageView);
         catItemImageView = findViewById(R.id.catItemImageView);
+
+        addToBasketButton = findViewById(R.id.addToBasketButton);
+
+        quantityEditText = findViewById(R.id.quantityEditText);
+        increaseButton = findViewById(R.id.increaseButton);
+        decreaseButton = findViewById(R.id.decreaseButton);
 
         //Get ID of Item Clicked to run search
         String documentID = userData.catItemClicked_Global;
@@ -131,16 +160,76 @@ public class CatListingView extends AppCompatActivity {
                             String FSCondition = document.getString("Condition");
                             String FSBrand = document.getString("Brand");
                             String FSDescription = document.getString("Description");
+                            String FSCurrency = document.getString("Currency");
+                            String FSSymbol = document.getString("Symbol");
+                            String FSTimeStamp = document.getString("TimeStamp");
+                            String FSStock = document.getString("Stock");
                             userData.imageURLBasket_Global = document.getString("ImageURL");
                             userData.itemSeller_Global = document.getString("UserID");
 
                             //Display in edit texts
                             titleTextView.setText(FSTitle);
                             priceTextView.setText(FSPrice);
+                            symbolTextView.setText(FSSymbol);
+                            currencyTextView.setText(" (" + FSCurrency + ")");
                             deliveryTextView.setText(FSDelivery);
                             conditionTextView.setText(FSCondition);
                             brandTextView.setText(FSBrand);
                             descriptionTextView.setText(FSDescription);
+
+                            //---Get Days Since Posted---//
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+                            String inputString1 = FSTimeStamp;
+                            String inputString2 = simpleDateFormat.format(new Date());
+
+                            try {
+                                Date date1 = simpleDateFormat.parse(inputString1);
+                                Date date2 = simpleDateFormat.parse(inputString2);
+                                long diff = date2.getTime() - date1.getTime();
+                                //Display Days since posted
+                                postedTextView.setSingleLine(false);
+                                if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 0){
+                                    newImageView.setVisibility(View.VISIBLE);
+                                    postedTextView.setVisibility(View.INVISIBLE);
+                                }
+                                else if (TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) == 1){
+                                    newImageView.setVisibility(View.GONE);
+                                    postedTextView.setText("POSTED \n" + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " DAY AGO");
+                                }
+                                else{
+                                    newImageView.setVisibility(View.GONE);
+                                    postedTextView.setText("POSTED \n" + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS) + " DAYS AGO");
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+
+                            //Display Stock
+                            if(FSStock.equals("unlimited")){
+                                stockTextView.setText("Available");
+                                stockTextView.setTextColor(Color.parseColor("#53d769"));
+                                userData.itemStock_Global = "unlimited";
+                            }
+                            else {
+                                int stockNum = Integer.parseInt(FSStock);
+                                if (stockNum >= 10) {
+                                    stockTextView.setText(stockNum + " Available");
+                                    stockTextView.setTextColor(Color.parseColor("#53d769"));
+                                    userData.itemStock_Global = FSStock;
+                                } else if (stockNum < 10 && stockNum > 0) {
+                                    stockTextView.setText("Only " + stockNum + " Remaining");
+                                    stockTextView.setTextColor(Color.parseColor("#fd9426"));
+                                    userData.itemStock_Global = FSStock;
+                                } else {
+                                    stockTextView.setText("Sold Out");
+                                    stockTextView.setTextColor(Color.parseColor("#fc3d39"));
+
+                                    //Can't Buy Item, Remove Add to basket Button
+                                    addToBasketButton.setVisibility(View.GONE);
+                                    userData.itemStock_Global = null;
+
+                                }
+                            }
 
                             //Display Photo
                             Picasso.get().load(userData.imageURLBasket_Global).into(catItemImageView);
@@ -167,6 +256,52 @@ public class CatListingView extends AppCompatActivity {
             Toast.makeText(CatListingView.this, "Oops! Looks like something went wrong getting item details.", Toast.LENGTH_SHORT).show();
 
         }
+        //---Stock Increase Button---//
+        increaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (userData.itemStock_Global.equals("unlimited")){
+                    //Increase as much as the user wants
+                    String strcurrentQuantity = quantityEditText.getText().toString().trim();
+                    int currentQuantity = Integer.parseInt(strcurrentQuantity);
+                    int newQuantity = currentQuantity + 1;
+                    quantityEditText.setText(newQuantity + "");
+                }
+                else{
+                    //Not unlimited
+                    //Get Current Value and add 1 (if stock allows for it)
+                    int quantityLimit = Integer.parseInt(userData.itemStock_Global);
+                    String strcurrentQuantity = quantityEditText.getText().toString().trim();
+                    int currentQuantity = Integer.parseInt(strcurrentQuantity);
+
+                    if (currentQuantity < quantityLimit){
+                        int newQuantity = currentQuantity + 1;
+                        quantityEditText.setText(newQuantity + "");
+                    }
+                }
+
+            }
+        });
+
+        //---Stock Decrease Button---//
+        decreaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Get Current Quantity and remove 1 only if quantity is > 1
+                String strcurrentQuantity = quantityEditText.getText().toString().trim();
+                int currentQuantity = Integer.parseInt(strcurrentQuantity);
+
+                if (currentQuantity > 1){
+                    int newQuantity = currentQuantity - 1;
+                    quantityEditText.setText(newQuantity + "");
+                }
+                else{
+                    // Cant add 0 items to basket
+                }
+
+
+            }
+        });
     }
 
     private void getSellerData() {

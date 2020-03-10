@@ -40,21 +40,12 @@
                     android:id="@+id/ItemRowTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLines="1"
                     android:padding="10dp"
+                    android:singleLine="true"
                     android:text="Title"
                     android:textAlignment="center"
                     android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ItemRowCatTextView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingLeft="30dp"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
-                    android:text="Category:"
-                    android:textAlignment="textStart"
                     android:textStyle="bold" />
 
                 <TextView
@@ -76,6 +67,17 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
                     android:text="Price:"
+                    android:textAlignment="textStart"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/ItemRowStockTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="Stock:"
                     android:textAlignment="textStart"
                     android:textStyle="bold" />
 

@@ -278,7 +278,7 @@
         android:layout_height="55dp"
         android:background="#FF5A5F"
         android:orientation="horizontal"
-        android:weightSum="5"
+        android:weightSum="4"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -309,14 +309,6 @@
             android:backgroundTint="#FF5A5F"
             android:onClick="basketClicked"
             app:srcCompat="@drawable/shopping_cart_white" />
-
-        <ImageButton
-            android:id="@+id/notificationsButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:backgroundTint="#FF5A5F"
-            app:srcCompat="@drawable/notifications_white" />
 
         <ImageButton
             android:id="@+id/profileButton"

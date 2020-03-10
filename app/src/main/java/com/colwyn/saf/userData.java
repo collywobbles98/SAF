@@ -7,6 +7,8 @@ public class userData {
     public static String firstname_Global;
     public static String lastname_Global;
 
+    public static String currency_Global;
+
     //Selling Activity
     public static Integer itemCount_Global;
 
@@ -23,8 +25,13 @@ public class userData {
     public static String catItemClicked_Global;
     public static String itemSeller_Global;
     public static String imageURLBasket_Global;
+    public static String itemStock_Global;
 
-    //Order Proccess
+    //Basket
+    public static Double subtotal_Global;
+
+
+    //Payment Details
     public static String cardtype_Global;
     public static String encryptednum1_Global;
     public static String encryptednum2_Global;
@@ -35,6 +42,10 @@ public class userData {
     public static String encryptedyear_Global;
     public static String encryptedccv_Global;
 
+    //Order Confirmation
+    public static Boolean basketEdit_Global;
+    public static Boolean paymentEdit_Global;
+    public static Boolean addressEdit_Global;
 
 
     //Test Variable

@@ -53,7 +53,7 @@ public class CatItemRecyclerAdapter extends RecyclerView.Adapter<CatItemRecycler
         viewHolder.title.setText(catItem.getTitle());
         viewHolder.condition.setText(catItem.getCondition());
         viewHolder.brand.setText(catItem.getBrand());
-        viewHolder.price.setText(catItem.getPrice());
+        viewHolder.price.setText("Price: " + catItem.getSymbol() + catItem.getPrice() + " (" + catItem.getCurrency() + ")");
         viewHolder.delivery_Notes.setText("Delivery: " + catItem.getDelivery_Notes());
 
         imageURL = catItem.getImageURL();

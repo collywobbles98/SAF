@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +19,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -45,6 +48,7 @@ public class basket extends AppCompatActivity {
 
     ImageView emptyImageView;
     TextView emptyTextView;
+    TextView symbolTextView, subtotalTextView, currencyTextView;
 
 
     //---Navigation---//
@@ -62,7 +66,9 @@ public class basket extends AppCompatActivity {
 
     //Checkout Button
     public void checkoutClicked(View view){
-        startActivity(new Intent(basket.this, paymentdetails.class));
+        //Save Payment Amount
+
+        startActivity(new Intent(basket.this, paymentOptions.class));
     }
 
     @Override
@@ -77,6 +83,70 @@ public class basket extends AppCompatActivity {
         basketRecyclerView = findViewById(R.id.basketRecyclerView);
         basketRecyclerView.setHasFixedSize(true);
         basketRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        symbolTextView = findViewById(R.id.symbolTextView);
+        subtotalTextView = findViewById(R.id.subtotalTextView);
+        currencyTextView = findViewById(R.id.currencyTextView);
+        userData.currency_Global = "(GBP)"; //Default Currency
+
+        //---Get Currency from Firestore---//
+        String userID = user.getUid();
+        try{
+            //Try get data from firestore
+            //---Get user data from firestore---//
+            DocumentReference docRef = db.collection("user").document(userID);
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            //---Retrieve data and store as string---//
+                            String FSCurrency = document.getString("Currency");
+                            userData.currency_Global = FSCurrency;
+
+                            //---Display Data---//
+                            if (FSCurrency.equals("(GBP)")){
+                                symbolTextView.setText("£");
+                            }
+                            else if (FSCurrency.equals("(EUR)")){
+                                symbolTextView.setText("€");
+                            }
+                            else if (FSCurrency.equals("(USD)")){
+                                symbolTextView.setText("$");
+                            }
+                            else if (FSCurrency.equals("(CAD)")){
+                                symbolTextView.setText("$");
+                            }
+                            else if (FSCurrency.equals("(AUD)")){
+                                symbolTextView.setText("$");
+                            }
+                            else if (FSCurrency.equals("(JPY)")){
+                                symbolTextView.setText("¥");
+                            }
+                            else{
+                                symbolTextView.setText("No Currency Selected.");
+                            }
+
+                            currencyTextView.setText(" " + FSCurrency);
+
+                        } else {
+                            //An error has occured, display error message and remove user from page.
+                            userData.currency_Global = "(GBP)"; //Default Currency
+                            Toast.makeText(basket.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        //Log.d(TAG, "get failed with ", task.getException());
+                        Toast.makeText(basket.this, "Try Again.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+        catch(Exception e){
+            //Error Occured Display error message
+            Toast.makeText(basket.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 
@@ -85,16 +155,14 @@ public class basket extends AppCompatActivity {
         super.onStart();
 
         //---Query to get items of current user---//
-
-        String userID = user.getUid();;
-
+        String userID = user.getUid();
         collectionReference.whereEqualTo("UserID", userID)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
-
+                            Double subtotal = 0.00;
                             //Check if the query is not empty
                             if (!task.getResult().isEmpty()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
@@ -104,15 +172,219 @@ public class basket extends AppCompatActivity {
                                     BasketItem basketItem = document.toObject(BasketItem.class).withId(docID);
                                     BasketItemList.add(basketItem);
 
-                                    //Display how many items the user has for sale
-                                    //itemCountTextView = findViewById(R.id.itemCountTextView);
-                                    //itemCountTextView.setText(task.getResult().size() + "");
+                                    //---Calculate Subtotal---//
+                                    //Get Data
+                                    String currency = document.getString("Currency").trim();
+                                    Double price = new Double(document.getString("Price"));
+                                    int quantity = Integer.parseInt(document.getString("Quantity"));
+                                    //Total Price of each Item
+                                    Double quantPrice = price * quantity;
+
+                                    //--To GBP--//
+                                    if (userData.currency_Global.equals("(GBP)")){
+                                        if (currency.equals("(GBP)")){
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        }
+                                        else if(currency.equals("(USD)")){
+                                            //USD -> GBP
+                                            subtotal = (subtotal + quantPrice) * 0.78;
+
+                                        }
+                                        else if (currency.equals("(EUR)")){
+                                            //EUR -> GBP
+                                            subtotal = (subtotal + quantPrice) * 0.85;
+                                        }
+                                        else if (currency.equals("(CAD)")){
+                                            //CAD -> GBP
+                                            subtotal = (subtotal + quantPrice) * 0.58;
+                                        }
+                                        else if (currency.equals("(AUD)")){
+                                            //AUD -> GBP
+                                            subtotal = (subtotal + quantPrice) * 0.51;
+                                        }
+                                        else if (currency.equals("(JPY)")){
+                                            //JPY -> GBP
+                                            subtotal = (subtotal + quantPrice) * 0.0071;
+                                        }
+                                        else{
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    //--To USD--//
+                                    if (userData.currency_Global.equals("(USD)")) {
+                                        if (currency.equals("(USD)")) {
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        } else if (currency.equals("(GBP)")) {
+                                            //GBP -> USD
+                                            subtotal = (subtotal + quantPrice) * 1.29;
+
+                                        } else if (currency.equals("(EUR)")) {
+                                            //EUR -> USD
+                                            subtotal = (subtotal + quantPrice) * 1.09;
+                                        } else if (currency.equals("(CAD)")) {
+                                            //CAD -> USD
+                                            subtotal = (subtotal + quantPrice) * 0.75;
+                                        } else if (currency.equals("(AUD)")) {
+                                            //AUD -> USD
+                                            subtotal = (subtotal + quantPrice) * 0.66;
+                                        } else if (currency.equals("(JPY)")) {
+                                            //JPY -> USD
+                                            subtotal = (subtotal + quantPrice) * 0.0091;
+                                        } else {
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    //--To EUR--//
+                                    if (userData.currency_Global.equals("(EUR)")){
+                                        if (currency.equals("(EUR)")){
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        }
+                                        else if(currency.equals("(USD)")){
+                                            //USD -> EUR
+                                            subtotal = (subtotal + quantPrice) * 0.91;
+
+                                        }
+                                        else if (currency.equals("(GBP)")){
+                                            //GBP -> EUR
+                                            subtotal = (subtotal + quantPrice) * 1.18;
+                                        }
+                                        else if (currency.equals("(CAD)")){
+                                            //CAD -> EUR
+                                            subtotal = (subtotal + quantPrice) * 0.68;
+                                        }
+                                        else if (currency.equals("(AUD)")){
+                                            //AUD -> EUR
+                                            subtotal = (subtotal + quantPrice) * 0.60;
+                                        }
+                                        else if (currency.equals("(JPY)")){
+                                            //JPY -> EUR
+                                            subtotal = (subtotal + quantPrice) * 0.0083;
+                                        }
+                                        else{
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    //--To CAD--//
+                                    if (userData.currency_Global.equals("(CAD)")){
+                                        if (currency.equals("(CAD)")){
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        }
+                                        else if(currency.equals("(USD)")){
+                                            //USD -> CAD
+                                            subtotal = (subtotal + quantPrice) * 1.33;
+                                        }
+                                        else if (currency.equals("(EUR)")){
+                                            //EUR -> CAD
+                                            subtotal = (subtotal + quantPrice) * 1.46;
+                                        }
+                                        else if (currency.equals("(GBP)")){
+                                            //GBP -> CAD
+                                            subtotal = (subtotal + quantPrice) * 1.72;
+                                        }
+                                        else if (currency.equals("(AUD)")){
+                                            //AUD -> CAD
+                                            subtotal = (subtotal + quantPrice) * 0.88;
+                                        }
+                                        else if (currency.equals("(JPY)")){
+                                            //JPY -> CAD
+                                            subtotal = (subtotal + quantPrice) * 0.012;
+                                        }
+                                        else{
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    //--To AUD--//
+                                    if (userData.currency_Global.equals("(AUD)")){
+                                        if (currency.equals("(AUD)")){
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        }
+                                        else if(currency.equals("(USD)")){
+                                            //USD -> AUD
+                                            subtotal = (subtotal + quantPrice) * 1.52;
+                                        }
+                                        else if (currency.equals("(EUR)")){
+                                            //EUR -> AUD
+                                            subtotal = (subtotal + quantPrice) * 1.67;
+                                        }
+                                        else if (currency.equals("(GBP)")){
+                                            //GBP -> AUD
+                                            subtotal = (subtotal + quantPrice) * 1.96;
+                                        }
+                                        else if (currency.equals("(CAD)")){
+                                            //CAD -> AUD
+                                            subtotal = (subtotal + quantPrice) * 1.14;
+                                        }
+                                        else if (currency.equals("(JPY)")){
+                                            //JPY -> AUD
+                                            subtotal = (subtotal + quantPrice) * 0.014;
+                                        }
+                                        else{
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    //--To JPY--//
+                                    if (userData.currency_Global.equals("(JPY)")){
+                                        if (currency.equals("(JPY)")){
+                                            //No Currency Change Needed
+                                            subtotal = subtotal + quantPrice;
+                                        }
+                                        else if(currency.equals("(USD)")){
+                                            //USD -> JPY
+                                            subtotal = (subtotal + quantPrice) * 109.92;
+                                        }
+                                        else if (currency.equals("(EUR)")){
+                                            //EUR -> JPY
+                                            subtotal = (subtotal + quantPrice) * 120.48;
+                                        }
+                                        else if (currency.equals("(GBP)")){
+                                            //GBP -> JPY
+                                            subtotal = (subtotal + quantPrice) * 141.70;
+                                        }
+                                        else if (currency.equals("(CAD)")){
+                                            //CAD -> JPY
+                                            subtotal = (subtotal + quantPrice) * 82.34;
+                                        }
+                                        else if (currency.equals("(AUD)")){
+                                            //AUD -> JPY
+                                            subtotal = (subtotal + quantPrice) * 72.29;
+                                        }
+                                        else{
+                                            //DataBase Error
+                                            Toast.makeText(basket.this, "Oops! Somethings Wrong. Please review your basket.", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+
+                                    //Display Subtotal
+                                    //With 2 decimal places
+                                    String strSubtotal = String.format("%.2f", subtotal);
+                                    subtotalTextView.setText(strSubtotal);
+                                    //Save Subtotal for checkout
+                                    userData.subtotal_Global = subtotal;
+
+
                                 }
 
                                 //Invoke Recycler View
                                 basketRecyclerAdapter = new BasketRecyclerAdapter(getApplicationContext(), BasketItemList);
                                 basketRecyclerView.setAdapter(basketRecyclerAdapter);
                                 basketRecyclerAdapter.notifyDataSetChanged();
+
 
                             }
                             else {
