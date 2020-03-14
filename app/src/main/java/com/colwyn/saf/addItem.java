@@ -719,7 +719,6 @@ public class addItem extends AppCompatActivity {
                 listings.put("ImageURL", userData.FSImageURL_Global);
             }
 
-
             db.collection("listings").document(userData.userItemClicked_Global)
                     .set(listings)//, SetOptions.merge())
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -742,11 +741,6 @@ public class addItem extends AppCompatActivity {
                             Toast.makeText(addItem.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
-
-
-
 
         }
 

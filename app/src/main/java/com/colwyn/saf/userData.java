@@ -29,7 +29,10 @@ public class userData {
 
     //Basket
     public static Double subtotal_Global;
+    public static String goods_Global;
 
+    //Payment method
+    public static String paymentMethod_Global = "card";
 
     //Payment Details
     public static String cardtype_Global;
@@ -42,10 +45,14 @@ public class userData {
     public static String encryptedyear_Global;
     public static String encryptedccv_Global;
 
+    //Stock Control
+    public static String listingToUpdate_Global;
+
     //Order Confirmation
     public static Boolean basketEdit_Global;
     public static Boolean paymentEdit_Global;
     public static Boolean addressEdit_Global;
+    public static String orderRef_Global;
 
 
     //Test Variable

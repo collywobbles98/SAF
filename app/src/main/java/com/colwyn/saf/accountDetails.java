@@ -180,13 +180,16 @@ public class accountDetails extends AppCompatActivity {
                             }
                         });
 
-
-
-
-
-                //Return & Return to Profile
-                startActivity(new Intent(accountDetails.this, Profile.class));
-
+                //---If its an edit from checkout---//
+                if (userData.addressEdit_Global){
+                    //Return to confirm order
+                    startActivity(new Intent(accountDetails.this, confirmorder.class));
+                    userData.addressEdit_Global = Boolean.FALSE;
+                }
+                else{
+                    //Return & Return to Profile
+                    startActivity(new Intent(accountDetails.this, Profile.class));
+                }
 
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();

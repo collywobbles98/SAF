@@ -98,6 +98,19 @@
                         android:layout_marginTop="5dp"
                         android:text="1"
                         android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView23"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginRight="15dp"
+                        android:layout_weight="1"
+                        android:text="Hold To Remove"
+                        android:textAlignment="textEnd"
+                        android:textColor="#E70A0A"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
             </LinearLayout>

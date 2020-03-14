@@ -76,8 +76,7 @@ public class CatListingView extends AppCompatActivity {
             basket_items.put("Currency", currencyTextView.getText().toString().trim());
             basket_items.put("Quantity", quantityEditText.getText().toString().trim());
             basket_items.put("Delivery_Notes", deliveryTextView.getText().toString().trim());
-
-
+            basket_items.put("SellerID", userData.itemSeller_Global);
 
 
             // Add a new document with a generated ID

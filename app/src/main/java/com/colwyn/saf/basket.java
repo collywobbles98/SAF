@@ -1,5 +1,6 @@
 package com.colwyn.saf;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,6 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.colwyn.saf.model.BasketItem;
 import com.colwyn.saf.ui.BasketRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -64,11 +68,98 @@ public class basket extends AppCompatActivity {
         startActivity(new Intent(basket.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
-    //Checkout Button
+    //---Checkout Button---//
     public void checkoutClicked(View view){
-        //Save Payment Amount
-
         startActivity(new Intent(basket.this, paymentOptions.class));
+    }
+
+    //---Empty Basket Button---//
+    public void emptyBasketClicked (View view){
+        //Remove record if userid matches
+        db.collection("basket_items")
+                .whereEqualTo("UserID", user.getUid())
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                //Log.d(TAG, document.getId() + " => " + document.getData());
+                                //Delete this document
+                                db.collection("basket_items").document(document.getId())
+                                        .delete()
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                //Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                //Reload Activity
+                                                finish();
+                                                startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                //Log.w(TAG, "Error deleting document", e);
+                                                Toast.makeText(basket.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                        } else {
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
+
+    }
+
+    //---Delete DialogBox---//
+    private AlertDialog AskOption()
+    {
+        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
+                // set message, title, and icon
+                .setTitle("Remove Item")
+                .setMessage("Do you want to remove this item from your basket?")
+                .setIcon(R.drawable.ic_delete_forever_black_24dp)
+
+                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //Delete Listing
+                        db.collection("listings").document(userData.userItemClicked_Global)
+                                .delete()
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        //Reload Activity
+                                        finish();
+                                        startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                    }
+                                });
+
+
+
+                        dialog.dismiss();
+
+                    }
+
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        dialog.dismiss();
+
+                    }
+                })
+                .create();
+
+        return myQuittingDialogBox;
     }
 
     @Override
@@ -401,6 +492,8 @@ public class basket extends AppCompatActivity {
                     }
 
                 });
+
+
 
 
 

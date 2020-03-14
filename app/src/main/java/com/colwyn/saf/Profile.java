@@ -73,6 +73,8 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        //---Not an edit---//
+        userData.addressEdit_Global = Boolean.FALSE;
 
         userData.userID_Global = user.getUid();
         String userID = user.getUid();

@@ -1,6 +1,7 @@
 package com.colwyn.saf.ui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.colwyn.saf.R;
+import com.colwyn.saf.basket;
 import com.colwyn.saf.model.BasketItem;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -23,6 +31,12 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
     private Context context;
 
     private List<BasketItem> BasketItemList;
+
+
+    //---Firebase & Firestore---//
+    private StorageReference mStorageRef;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
 
     public BasketRecyclerAdapter(Context context, List<BasketItem> basketItemList) {
@@ -63,20 +77,40 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
-
-                //Store Document ID in Global Variable
-                //userData.catItemClicked_Global = documentID;
-
-                //Move to listing view Acivity
-//                Intent intent = new Intent(context, CatListingView.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
-
-
-
+                //Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Hold to Remove", Toast.LENGTH_SHORT).show();
             }
         });
+
+        viewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                db.collection("basket_items").document(documentID)
+                        .delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                //Reload Activity
+                                //Move to listing view Acivity
+                                Intent intent = new Intent(context, basket.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+                                Toast.makeText(context, "Item Removed", Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(context, "Item Cant be removed at this time.", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                return false;
+            }
+
+        });
+
+
+
     }
 
     @Override

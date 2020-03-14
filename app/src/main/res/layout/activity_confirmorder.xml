@@ -6,6 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".confirmorder">
 
+    <TextView
+        android:id="@+id/textView58"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar11"
         android:layout_width="match_parent"
@@ -17,7 +24,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <TextView
-        android:id="@+id/textView23"
+        android:id="@+id/listingToUpdateTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -52,7 +59,7 @@
                 android:textAlignment="center" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buyNowButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -283,8 +290,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#FF5A5F"
-                android:onClick="returnClicked"
-                android:text="Return to Catalogue"
+                android:text="@android:string/cancel"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 

@@ -372,6 +372,7 @@ public class paymentdetails extends AppCompatActivity {
                 //Number1
                 if(TextUtils.isEmpty(num1EditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (num1EditText.getText().length() == 4){
@@ -388,11 +389,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //Number 2
                 if(TextUtils.isEmpty(num2EditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (num2EditText.getText().length() == 4){
@@ -409,11 +412,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //Number 3
                 if(TextUtils.isEmpty(num3EditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (num3EditText.getText().length() == 4){
@@ -430,11 +435,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //Number 4
                 if(TextUtils.isEmpty(num4EditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (num4EditText.getText().length() == 4){
@@ -451,11 +458,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your card number", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //Name
                 if(TextUtils.isEmpty(nameEditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter the cardholders name", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else{
@@ -465,6 +474,7 @@ public class paymentdetails extends AppCompatActivity {
                 //Expiration Month
                 if(TextUtils.isEmpty(monthEditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter the month of expiry", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (monthEditText.getText().length() == 2){
@@ -481,11 +491,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your expiry month", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //Expiration Year
                 if(TextUtils.isEmpty(yearEditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter the year of expiry", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (yearEditText.getText().length() == 2){
@@ -502,11 +514,13 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check your expiry year", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 //CCV
                 if(TextUtils.isEmpty(ccvEditText.getText())){
                     Toast.makeText(paymentdetails.this, "Please enter the CCV number on the back of your card", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
                 else if (ccvEditText.getText().length() == 3){
@@ -524,6 +538,7 @@ public class paymentdetails extends AppCompatActivity {
                 }
                 else{
                     Toast.makeText(paymentdetails.this, "Please check the CCV number on the back of your card", Toast.LENGTH_SHORT).show();
+                    paymentProgressBar.setVisibility(View.GONE);
                     return;
                 }
 
@@ -532,6 +547,6 @@ public class paymentdetails extends AppCompatActivity {
 
             }
         });
-
+        paymentProgressBar.setVisibility(View.GONE);
     }
 }

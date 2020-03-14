@@ -136,7 +136,6 @@ public class currency extends AppCompatActivity {
 
                 DocumentReference currencyRef = db.collection("user").document(userID);
 
-                // Set the "isCapital" field of the city 'DC'
                 currencyRef
                         .update("Currency", currency)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
