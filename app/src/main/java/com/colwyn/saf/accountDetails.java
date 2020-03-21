@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +44,6 @@ public class accountDetails extends AppCompatActivity {
     EditText txtPhoneNum;
     //For Progress Bar
     LinearLayout linearLayout;
-    ProgressBar accountProgressbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +63,7 @@ public class accountDetails extends AppCompatActivity {
         txtPhoneNum = findViewById(R.id.phoneNumEditText);
         //For Progress Bar
         linearLayout = findViewById(R.id.linearLayout);
-        accountProgressbar = findViewById(R.id.accountprogressBar);
+
 
         //---Get User ID & Email from global variable---//
         String userID = userData.userID_Global;
@@ -109,7 +107,6 @@ public class accountDetails extends AppCompatActivity {
 
 
                             //Hide progress bar and show data
-                            accountProgressbar.setVisibility(View.INVISIBLE);
                             linearLayout.setVisibility(View.VISIBLE);
                             //Toast.makeText(accountDetails.this,  "User data found " + FSFirstname , Toast.LENGTH_SHORT).show();
                             //Log.d(TAG, "DocumentSnapshot data: " + document.getData());

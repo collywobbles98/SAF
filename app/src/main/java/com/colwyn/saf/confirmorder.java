@@ -69,19 +69,23 @@ public class confirmorder extends AppCompatActivity {
         buyNowButton = findViewById(R.id.buyNowButton);
         listingToUpdateTextView = findViewById(R.id.listingToUpdateTextView);
 
+        //---Get Subtotal---//
+        //Display Subtotal
+        //With 2 decimal places
+        String strSubtotal = String.format("%.2f", userData.subtotal_Global);
 
         //---Display data---//
         if (userData.currency_Global.equals("(GBP)")){
-            orderTotalTextView.setText("£" + userData.subtotal_Global + " " + userData.currency_Global);
+            orderTotalTextView.setText("£" + strSubtotal + " " + userData.currency_Global);
         }
         else if (userData.currency_Global.equals("(EUR)")){
-            orderTotalTextView.setText("€" + userData.subtotal_Global + " " + userData.currency_Global);
+            orderTotalTextView.setText("€" + strSubtotal + " " + userData.currency_Global);
         }
         else if (userData.currency_Global.equals("(JPY)")){
-            orderTotalTextView.setText("¥" + userData.subtotal_Global + " " + userData.currency_Global);
+            orderTotalTextView.setText("¥" + strSubtotal + " " + userData.currency_Global);
         }
         else{
-            orderTotalTextView.setText("$" + userData.subtotal_Global + " " + userData.currency_Global);
+            orderTotalTextView.setText("$" + strSubtotal + " " + userData.currency_Global);
         }
 
         //---Get User Information from firestore---//

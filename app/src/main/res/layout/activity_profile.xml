@@ -39,6 +39,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="#ffffff"
         app:cardCornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,7 +102,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="myOrdersClicked"
-                app:cardBackgroundColor="#FFFFFF"
+                app:cardBackgroundColor="#ffffff"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
@@ -135,9 +136,8 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
                 android:onClick="mySalesClicked"
-                app:cardBackgroundColor="#0984E3"
+                app:cardBackgroundColor="#ffffff"
                 app:cardCornerRadius="8dp">
 
                 <LinearLayout
@@ -226,13 +226,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tint="#0984E3"
-                        app:srcCompat="@drawable/ic_accessibility_black_24dp" />
+                        app:srcCompat="@drawable/ic_help_black_24dp" />
 
                     <TextView
                         android:id="@+id/textView51"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Display"
+                        android:text="Help"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="18sp"

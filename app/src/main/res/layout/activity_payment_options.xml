@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#f1f1f1"
     tools:context=".paymentOptions">
 
     <androidx.appcompat.widget.Toolbar
@@ -47,6 +48,7 @@
         android:layout_marginStart="15dp"
         android:layout_marginTop="15dp"
         android:layout_marginEnd="15dp"
+        app:cardBackgroundColor="#f1f1f1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar13">
@@ -63,7 +65,7 @@
                 android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:onClick="cardPaymentClicked"
-                app:cardBackgroundColor="#E3B505"
+                app:cardBackgroundColor="#7CB342"
                 app:cardCornerRadius="8dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -108,7 +110,8 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="150dp">
+                    android:layout_height="150dp"
+                    android:background="#7CB342">
 
                     <ImageView
                         android:id="@+id/imageView16"

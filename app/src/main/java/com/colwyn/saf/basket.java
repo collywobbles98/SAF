@@ -73,7 +73,13 @@ public class basket extends AppCompatActivity {
 
     //---Checkout Button---//
     public void checkoutClicked(View view){
-        startActivity(new Intent(basket.this, paymentOptions.class));
+        subtotalTextView = findViewById(R.id.subtotalTextView);
+        if (subtotalTextView.getText().toString().trim().equals("0.00")){
+            Toast.makeText(basket.this, "Please Add something to your basket.", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            startActivity(new Intent(basket.this, paymentOptions.class));
+        }
     }
 
     //---Empty Basket Button---//
