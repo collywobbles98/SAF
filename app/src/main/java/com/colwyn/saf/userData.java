@@ -22,6 +22,7 @@ public class userData {
     public static  String FSImageURL_Global;
 
     //Catalogue Items
+    public static String categories_Global;
     public static String catItemClicked_Global;
     public static String itemSeller_Global;
     public static String imageURLBasket_Global;
@@ -54,8 +55,22 @@ public class userData {
     public static Boolean addressEdit_Global;
     public static String orderRef_Global;
 
+    //My Orders
+    public static String orderClicked_Global;
 
-    //Test Variable
-    public static String test_Global;
+    //Sales
+    public static String SellingOrderClicked_Global;
 
+
+    //Messaging
+    public static String FSUser1FN;
+    public static String FSUser1LN;
+    public static String FSUser1Initials;
+    public static String FSUser2FN;
+    public static String FSUser2LN;
+    public static String FSUser2Initials;
+
+    public static String chatClicked_Global;
+    public static String chatOtherUser_Global;
+    public static String chatOtherUserID_Global;
 }

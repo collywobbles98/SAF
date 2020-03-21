@@ -1,4 +1,44 @@
 package com.colwyn.saf.model;
 
-public class OrderItem {
+public class OrderItem extends ItemDocID {
+
+    private String UserID;
+    private String CurrencyUsed;
+    private String OrderTotal;
+    private String TimeStamp;
+    private String PaymentMethod;
+    private String Goods;
+
+    //Empty Constructor for Firestore to Work
+    public OrderItem() {
+    }
+
+    public OrderItem(String userID, String currencyUsed, String orderTotal, String timeStamp, String paymentMethod, String goods) {
+
+        UserID = userID;
+        CurrencyUsed = currencyUsed;
+        OrderTotal = orderTotal;
+        TimeStamp = timeStamp;
+        PaymentMethod = paymentMethod;
+        Goods = goods;
+    }
+
+    public String getUserID() { return UserID; }
+    public void setUserID(String userID) { UserID = userID; }
+
+    public String getCurrencyUsed() { return CurrencyUsed; }
+    public void setCurrencyUsed(String currencyUsed) { CurrencyUsed = currencyUsed; }
+
+    public String getOrderTotal() { return OrderTotal; }
+    public void setOrderTotal(String orderTotal) { OrderTotal = orderTotal; }
+
+    public String getTimeStamp() { return TimeStamp; }
+    public void setTimeStamp(String timeStamp) { TimeStamp = timeStamp; }
+
+    public String getPaymentMethod() { return PaymentMethod; }
+    public void setPaymentMethod(String paymentMethod) { PaymentMethod = paymentMethod; }
+
+    public String getGoods() { return Goods; }
+    public void setGoods(String goods) { Goods = goods; }
+
 }

@@ -14,11 +14,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.anychart.AnyChart;
-import com.anychart.AnyChartView;
-import com.anychart.chart.common.dataentry.DataEntry;
-import com.anychart.chart.common.dataentry.ValueDataEntry;
-import com.anychart.charts.Pie;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -33,9 +28,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class listingView extends AppCompatActivity {
@@ -47,7 +40,6 @@ public class listingView extends AppCompatActivity {
     //---Declare Widgets---//
     TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, postedTextView, stockTextView;
     ImageView itemImageView, newImageView;
-    AnyChartView anyChartStock;
 
     //---Delete DialogBox---//
     private AlertDialog AskOption()
@@ -280,31 +272,8 @@ public class listingView extends AppCompatActivity {
             }
         });
 
-        //---Stock Chart---//
-        anyChartStock = findViewById(R.id.stockChart);
-        setupPieChart();
 
     }
 
-    public void setupPieChart(){
-
-        String[] title = {"total_stock", "remaining_stock"};
-        int[] stock = {100, 500};
-
-        //Pie Chart
-        Pie pie = AnyChart.pie();
-        List<DataEntry> dataEntries = new ArrayList<>();
-
-        for (int i = 0; i < title.length; i++){
-            dataEntries.add(new ValueDataEntry(title[i], stock[i]));
-        }
-
-        pie.data(dataEntries);
-        anyChartStock.setChart(pie);
-
-
-
-
-    }
 
 }

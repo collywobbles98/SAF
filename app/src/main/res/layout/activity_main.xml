@@ -30,13 +30,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:id="@+id/searchButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:tint="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar"
+        app:layout_constraintTop_toTopOf="@+id/toolbar"
+        app:srcCompat="@drawable/search_24dp" />
+
+    <TextView
+        android:id="@+id/noItemsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Sorry there are no items in this category."
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/toolbar" />
+
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView7"
+        android:id="@+id/searchCardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar">
@@ -46,15 +69,41 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
-            <SearchView
-                android:id="@+id/searchbar"
+            <ImageView
+                android:id="@+id/search2Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="#000000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/search_24dp" />
+
+            <ImageView
+                android:id="@+id/cancelSearchButton"
+                android:layout_width="36dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="10dp"
+                android:tint="#393E41"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.487"
+                app:srcCompat="@drawable/ic_cancel_black_24dp" />
+
+            <EditText
+                android:id="@+id/searchEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:clickable="false"
-                android:iconifiedByDefault="false"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="25dp"
+                android:layout_marginEnd="25dp"
+                android:layout_weight="1"
+                android:ems="10"
+                android:hint="Search"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/search2Button"
+                app:layout_constraintStart_toEndOf="@+id/cancelSearchButton"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -66,12 +115,11 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
         android:layout_marginEnd="5dp"
         android:scrollbars="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView7">
+        app:layout_constraintTop_toBottomOf="@+id/searchCardView">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -79,10 +127,21 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/allButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:backgroundTint="#0197F6"
+                android:onClick="allClicked"
+                android:text="All"
+                android:textColor="#FFFFFF" />
+
+            <Button
                 android:id="@+id/accessoriesButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="accessoriesClicked"
                 android:text="Accessories"
                 android:textColor="#FFFFFF" />
 
@@ -90,7 +149,8 @@
                 android:id="@+id/badgesDecalsButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="badgesClicked"
                 android:text="Badges, Decals"
                 android:textColor="#FFFFFF" />
 
@@ -98,7 +158,8 @@
                 android:id="@+id/bodyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="bodyClicked"
                 android:text="Body"
                 android:textColor="#FFFFFF" />
 
@@ -107,7 +168,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="brakesClicked"
                 android:text="Brakes"
                 android:textColor="#FFFFFF" />
 
@@ -116,7 +178,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="clutchClicked"
                 android:text="Clutch"
                 android:textColor="#FFFFFF" />
 
@@ -125,7 +188,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="coolingClicked"
                 android:text="Cooling, Heating"
                 android:textColor="#FFFFFF" />
 
@@ -134,7 +198,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="drivetrainClicked"
                 android:text="Drivetrain"
                 android:textColor="#FFFFFF" />
 
@@ -143,7 +208,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="electricsClicked"
                 android:text="Electrics"
                 android:textColor="#FFFFFF" />
 
@@ -152,7 +218,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="engineClicked"
                 android:text="Engine"
                 android:textColor="#FFFFFF" />
 
@@ -161,7 +228,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="exhaustClicked"
                 android:text="Exhaust"
                 android:textColor="#FFFFFF" />
 
@@ -170,7 +238,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="exteriorClicked"
                 android:text="Exterior"
                 android:textColor="#FFFFFF" />
 
@@ -179,7 +248,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="filtersClicked"
                 android:text="Filters"
                 android:textColor="#FFFFFF" />
 
@@ -188,7 +258,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="fuelClicked"
                 android:text="Fuel"
                 android:textColor="#FFFFFF" />
 
@@ -197,7 +268,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="gagesClicked"
                 android:text="Gages"
                 android:textColor="#FFFFFF" />
 
@@ -206,7 +278,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="gearboxClicked"
                 android:text="Gearbox"
                 android:textColor="#FFFFFF" />
 
@@ -215,7 +288,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="interiorClicked"
                 android:text="Interior"
                 android:textColor="#FFFFFF" />
 
@@ -224,7 +298,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="steeringClicked"
                 android:text="Steering"
                 android:textColor="#FFFFFF" />
 
@@ -233,7 +308,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="suspensionClicked"
                 android:text="Suspension"
                 android:textColor="#FFFFFF" />
 
@@ -242,7 +318,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="wheelsClicked"
                 android:text="Wheels"
                 android:textColor="#FFFFFF" />
 
@@ -251,7 +328,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:backgroundTint="#89AAE6"
+                android:backgroundTint="#0197F6"
+                android:onClick="otherClicked"
                 android:text="Other"
                 android:textColor="#FFFFFF" />
 
@@ -259,6 +337,7 @@
     </HorizontalScrollView>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout4"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout8"
@@ -270,6 +349,7 @@
             android:id="@+id/catItemRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
+
     </RelativeLayout>
 
     <LinearLayout
@@ -278,7 +358,7 @@
         android:layout_height="55dp"
         android:background="#FF5A5F"
         android:orientation="horizontal"
-        android:weightSum="4"
+        android:weightSum="5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -309,6 +389,16 @@
             android:backgroundTint="#FF5A5F"
             android:onClick="basketClicked"
             app:srcCompat="@drawable/shopping_cart_white" />
+
+        <ImageButton
+            android:id="@+id/messagesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FF5A5F"
+            android:onClick="messagesClicked"
+            android:tint="#FFFFFF"
+            app:srcCompat="@drawable/chat_24dp" />
 
         <ImageButton
             android:id="@+id/profileButton"

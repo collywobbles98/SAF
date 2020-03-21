@@ -24,6 +24,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -240,11 +242,15 @@ public class confirmorder extends AppCompatActivity {
     }
 
     private void placeOrder(){
+        //Timestamp
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        String format = simpleDateFormat.format(new Date());
+
         //Save Order Data to firestore
         Map<String, Object> orders = new HashMap<>();
         orders.put("UserID", user.getUid());
         orders.put("PaymentMethod", userData.paymentMethod_Global);
-        orders.put("OrderTotal", userData.subtotal_Global);
+        orders.put("OrderTotal", userData.subtotal_Global.toString().trim());
         orders.put("Goods", userData.goods_Global);
         orders.put("CurrencyUsed", userData.currency_Global);
         orders.put("CardNum1", userData.encryptednum1_Global);
@@ -257,6 +263,7 @@ public class confirmorder extends AppCompatActivity {
         orders.put("CCV", userData.encryptedccv_Global);
         orders.put("DeliveryName", deliveryNameTextView.getText().toString().trim());
         orders.put("DeliveryAddress", deliveryAddressTextView.getText().toString().trim());
+        orders.put("TimeStamp", format);
 
         // Add a new document with a generated ID
         db.collection("orders")
@@ -286,6 +293,7 @@ public class confirmorder extends AppCompatActivity {
                                                 //Log.d(TAG, document.getId() + " => " + document.getData());
                                                 String FSquantity = document.getString("Quantity");
                                                 String FSitemID = document.getString("Item");
+                                                String FStitle = document.getString("Title");
                                                 String FSSellerID = document.getString("SellerID");
 
                                                 //Add data to firestore database
@@ -293,6 +301,7 @@ public class confirmorder extends AppCompatActivity {
                                                 items_sold.put("BuyerID", user.getUid());
                                                 items_sold.put("SellerID", FSSellerID);
                                                 items_sold.put("ItemID", FSitemID);
+                                                items_sold.put("ItemTitle", FStitle);
                                                 items_sold.put("Quantity", FSquantity);
                                                 items_sold.put("BuyerName", deliveryNameTextView.getText().toString().trim());
                                                 items_sold.put("BuyerAddress", deliveryAddressTextView.getText().toString().trim());

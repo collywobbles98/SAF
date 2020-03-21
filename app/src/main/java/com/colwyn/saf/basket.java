@@ -1,6 +1,5 @@
 package com.colwyn.saf;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,7 +8,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -67,6 +65,11 @@ public class basket extends AppCompatActivity {
     public void profileClicked(View view){
         startActivity(new Intent(basket.this, Profile.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
+    //Messages
+    public void messagesClicked(View view){
+
+        startActivity(new Intent(basket.this, chats.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
 
     //---Checkout Button---//
     public void checkoutClicked(View view){
@@ -95,6 +98,7 @@ public class basket extends AppCompatActivity {
                                                 //Reload Activity
                                                 finish();
                                                 startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                                Toast.makeText(basket.this, "Your basket is now empty.", Toast.LENGTH_SHORT).show();
                                             }
                                         })
                                         .addOnFailureListener(new OnFailureListener() {
@@ -112,54 +116,6 @@ public class basket extends AppCompatActivity {
                 });
 
 
-    }
-
-    //---Delete DialogBox---//
-    private AlertDialog AskOption()
-    {
-        AlertDialog myQuittingDialogBox = new AlertDialog.Builder(this)
-                // set message, title, and icon
-                .setTitle("Remove Item")
-                .setMessage("Do you want to remove this item from your basket?")
-                .setIcon(R.drawable.ic_delete_forever_black_24dp)
-
-                .setPositiveButton("Delete", new DialogInterface.OnClickListener() {
-
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        //Delete Listing
-                        db.collection("listings").document(userData.userItemClicked_Global)
-                                .delete()
-                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void aVoid) {
-                                        //Reload Activity
-                                        finish();
-                                        startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
-                                    }
-                                })
-                                .addOnFailureListener(new OnFailureListener() {
-                                    @Override
-                                    public void onFailure(@NonNull Exception e) {
-                                    }
-                                });
-
-
-
-                        dialog.dismiss();
-
-                    }
-
-                })
-                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        dialog.dismiss();
-
-                    }
-                })
-                .create();
-
-        return myQuittingDialogBox;
     }
 
     @Override

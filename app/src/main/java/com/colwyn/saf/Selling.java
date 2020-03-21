@@ -43,7 +43,6 @@ public class Selling extends AppCompatActivity {
     private TextView itemCountTextView;
     String userIDFB = user.getUid();
 
-
     //---Navigation---//
     //Basket Activity
     public void basketClicked(View view){
@@ -63,6 +62,10 @@ public class Selling extends AppCompatActivity {
         startActivity(new Intent(Selling.this, addItem.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
         //Close Activity to force a refresh
         finish();
+    }
+    //Messages Activity
+    public void messagesClicked(View view){
+        startActivity(new Intent(Selling.this, chats.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
 
@@ -108,11 +111,8 @@ public class Selling extends AppCompatActivity {
                                     //Get Document ID
                                     String docID= document.getId();
 
-
                                     UserItem userItem = document.toObject(UserItem.class).withId(docID);
                                     UserItemList.add(userItem);
-
-
 
                                     //Display how many items the user has for sale
                                     itemCountTextView = findViewById(R.id.itemCountTextView);

@@ -9,40 +9,94 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ordercomplete"></activity>
-        <activity android:name=".paymentOptions" />
-        <activity android:name=".currency" />
-        <activity android:name=".confirmorder" />
-        <activity android:name=".paymentdetails" />
-        <activity android:name=".basket" />
-        <activity android:name=".CatListingView" />
+        <activity android:name=".displayhelp"></activity>
+        <activity
+            android:name=".messages"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name=".chats"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".status"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".incomingorders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".orderbreakdown"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".myorders"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ordercomplete"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".paymentOptions"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".currency"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".confirmorder"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".paymentdetails"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".basket"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CatListingView"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".listingView"
             android:label="@string/title_activity_listing_view"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".addItem" />
-        <activity android:name=".SellItem" />
-        <activity android:name=".Selling" />
-        <activity android:name=".Tutorial1" />
-        <activity android:name=".testactivity" />
+        <activity
+            android:name=".addItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SellItem"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Selling"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Tutorial1"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".testactivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".accountDetails"
             android:label="@string/title_activity_account_details"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ScrollingActivity"
             android:label="@string/title_activity_scrolling"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Profile" />
-        <activity android:name=".Register" />
-        <activity android:name=".LogIn">
+        <activity
+            android:name=".Profile"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Register"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".LogIn"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

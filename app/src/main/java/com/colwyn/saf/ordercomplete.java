@@ -20,6 +20,10 @@ public class ordercomplete extends AppCompatActivity {
         //To catalogue
         startActivity(new Intent(ordercomplete.this, MainActivity.class));
     }
+    public void myOrdersClicked (View view){
+        //To catalogue
+        startActivity(new Intent(ordercomplete.this, myorders.class));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

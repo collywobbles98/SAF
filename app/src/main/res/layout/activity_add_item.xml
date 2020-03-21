@@ -34,6 +34,10 @@
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="10dp"
         android:background="#f1f1f1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -149,6 +153,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/TextView" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
@@ -348,6 +353,7 @@
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
+
             <Space
                 android:layout_width="match_parent"
                 android:layout_height="25dp" />
@@ -379,7 +385,7 @@
                         android:layout_marginStart="45dp"
                         android:layout_marginEnd="45dp"
                         android:ems="10"
-                        android:hint="Item Description (100 characters min)"
+                        android:hint="Item Description"
                         android:inputType="textPersonName|textMultiLine"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -484,7 +490,8 @@
                         android:layout_marginStart="25dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="25dp"
-                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:orientation="vertical"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/priceEditText">

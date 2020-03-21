@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +43,7 @@ public class CatListingView extends AppCompatActivity {
     ImageView catItemImageView, newImageView;
     Button addToBasketButton, increaseButton, decreaseButton;
     EditText quantityEditText;
+    CardView messageSellerCardView;
 
 
     //---Nav---//
@@ -134,6 +136,8 @@ public class CatListingView extends AppCompatActivity {
         quantityEditText = findViewById(R.id.quantityEditText);
         increaseButton = findViewById(R.id.increaseButton);
         decreaseButton = findViewById(R.id.decreaseButton);
+
+        messageSellerCardView = findViewById(R.id.messageSellerCardView);
 
         //Get ID of Item Clicked to run search
         String documentID = userData.catItemClicked_Global;
@@ -297,10 +301,175 @@ public class CatListingView extends AppCompatActivity {
                 else{
                     // Cant add 0 items to basket
                 }
-
-
             }
         });
+
+
+        //---Message Seller Button---//
+
+        messageSellerCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //If the Viewer is the seller remove the option to message
+                if (userData.itemSeller_Global.equals(user.getUid())) {
+                    Toast.makeText(CatListingView.this, "This is your item.", Toast.LENGTH_SHORT).show();
+                } else {
+                    //Not the seller so dont hide
+                    //Create the messages
+                    //Save user 1 (Current user) save user 2 (Seller) and a starter message ("Send a message")
+                    //Make Document ID = user1id + user2id this can be checked for duplicates with two if statements
+
+                    //Check this messages has not been created before
+
+                    DocumentReference docRef = db.collection("chats").document(user.getUid() + userData.itemSeller_Global);
+                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                            if (task.isSuccessful()) {
+                                DocumentSnapshot document = task.getResult();
+                                if (document.exists()) {
+                                    //Take User To Messages
+                                    userData.chatClicked_Global = user.getUid()+userData.itemSeller_Global;
+                                    userData.chatOtherUser_Global = nameTextView.getText().toString().trim();
+                                    startActivity(new Intent(CatListingView.this, messages.class));
+                                } else {
+                                    //Check for the reverse
+
+                                    DocumentReference docRef = db.collection("chats").document(userData.itemSeller_Global + user.getUid());
+                                    docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                            if (task.isSuccessful()) {
+                                                DocumentSnapshot document = task.getResult();
+                                                if (document.exists()) {
+                                                    //Take User To Messages
+                                                    userData.chatClicked_Global = userData.itemSeller_Global + user.getUid();
+                                                    userData.chatOtherUser_Global = nameTextView.getText().toString().trim();
+                                                    startActivity(new Intent(CatListingView.this, messages.class));
+                                                } else {
+                                                    //No Chat Exists Make the messages
+                                                    getUser1Details();
+
+                                                    //Open the messages
+
+                                                }
+                                            } else {
+                                                //Log.d(TAG, "get failed with ", task.getException());
+                                            }
+                                        }
+                                    });
+
+
+                                }
+                            } else {
+                                //Log.d(TAG, "get failed with ", task.getException());
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+
+    private void getUser1Details(){
+
+        //Get User 1 Name
+        DocumentReference docRef2 = db.collection("user").document(user.getUid());
+        docRef2.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        //Retrieve data and store as string
+                        userData.FSUser1FN = document.getString("First Name");
+                        userData.FSUser1LN = document.getString("Last Name");
+                        userData.FSUser1Initials = ("" + userData.FSUser1FN.charAt(0) + userData.FSUser1LN.charAt(0));
+                        getUser2Details();
+
+
+                    } else {
+                        //Document Doesn't Exist
+                        Toast.makeText(CatListingView.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+
+    }
+
+    private void getUser2Details(){
+
+        //get User 2 Name
+        DocumentReference docRef3 = db.collection("user").document(userData.itemSeller_Global);
+        docRef3.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        //Retrieve data and store as string
+                        userData.FSUser2FN = document.getString("First Name");
+                        userData.FSUser2LN = document.getString("Last Name");
+                        userData.FSUser2Initials = ("" + userData.FSUser2FN.charAt(0) + userData.FSUser2LN.charAt(0));
+                        makeChat();
+
+                    } else {
+                        //Document Doesn't Exist
+                        Toast.makeText(CatListingView.this, "Oops! Looks like something went wrong.", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    //Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
+
+    }
+
+    private void makeChat(){
+        //Save Data
+        Map<String, Object> chats = new HashMap<>();
+        chats.put("User1", user.getUid());
+        chats.put("User1FirstName", userData.FSUser1FN);
+        chats.put("User1LastName", userData.FSUser1LN);
+        chats.put("User1Initials", userData.FSUser1Initials);
+
+        chats.put("User2", userData.itemSeller_Global);
+        chats.put("User2FirstName", userData.FSUser2FN);
+        chats.put("User2LastName", userData.FSUser2LN);
+        chats.put("User2Initials", userData.FSUser2Initials);
+        SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss 'at' yyyy-MM-dd");
+        Date date = new Date(System.currentTimeMillis());
+        chats.put("TimeStamp", date.toString().trim());
+
+        chats.put("LastMessage", "Send a Message");
+
+        db.collection("chats").document(user.getUid()+userData.itemSeller_Global)
+                .set(chats)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        //Log.d(TAG, "DocumentSnapshot successfully written!");
+                        //Go to Chat
+                        userData.chatClicked_Global = user.getUid()+userData.itemSeller_Global;
+                        userData.chatOtherUser_Global = nameTextView.getText().toString().trim();
+                        startActivity(new Intent(CatListingView.this, messages.class));
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //Log.w(TAG, "Error writing document", e);
+                        Toast.makeText(CatListingView.this, "Oops! Looks like something went wrong getting seller details.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
     private void getSellerData() {

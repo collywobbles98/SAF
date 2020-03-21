@@ -50,6 +50,11 @@ public class Profile extends AppCompatActivity {
         startActivity(new Intent(Profile.this, basket.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
+    public void messagesClicked(View view){
+
+        startActivity(new Intent(Profile.this, chats.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
      public void logoutClicked (View view){
          usernameTextView = findViewById(R.id.usernameTextView);
          usernameTextView.setText(userData.userID_Global);
@@ -67,6 +72,14 @@ public class Profile extends AppCompatActivity {
          //Take user to edit details activity
          startActivity(new Intent(Profile.this, accountDetails.class));
      }
+    public void myOrdersClicked (View view){
+        //Take user to edit details activity
+        startActivity(new Intent(Profile.this, myorders.class));
+    }
+    public void mySalesClicked (View view){
+        //Take user to edit details activity
+        startActivity(new Intent(Profile.this, incomingorders.class));
+    }
 
 
     @Override
