@@ -3,6 +3,8 @@ package com.colwyn.saf;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,22 +15,31 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.colwyn.saf.model.ReviewItem;
+import com.colwyn.saf.ui.ReviewItemRecyclerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -38,12 +49,19 @@ public class CatListingView extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
+    //Firestore Collection Reference
+    private CollectionReference collectionReference = db.collection("reviews");
+
     //---Declare Widgets---//
-    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, nameTextView, locationTextView, numberTextView, emailTextView, postedTextView, symbolTextView, currencyTextView, stockTextView;
+    TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, nameTextView, locationTextView, numberTextView, emailTextView, postedTextView, symbolTextView, currencyTextView, stockTextView, reviewNumtextView;
     ImageView catItemImageView, newImageView;
     Button addToBasketButton, increaseButton, decreaseButton;
     EditText quantityEditText;
     CardView messageSellerCardView;
+
+    private List<ReviewItem> ReviewItemList;
+    private RecyclerView reviewRecyclerView;
+    private ReviewItemRecyclerAdapter reviewItemRecyclerAdapter;
 
 
     //---Nav---//
@@ -53,6 +71,10 @@ public class CatListingView extends AppCompatActivity {
         userData.itemSeller_Global = null;
         userData.itemStock_Global = null;
         startActivity(new Intent(CatListingView.this, MainActivity.class));
+    }
+
+    public void addReviewClicked (View view){
+        startActivity(new Intent(CatListingView.this, addReview.class));
     }
 
 //---Add Items to basket---//
@@ -138,6 +160,12 @@ public class CatListingView extends AppCompatActivity {
         decreaseButton = findViewById(R.id.decreaseButton);
 
         messageSellerCardView = findViewById(R.id.messageSellerCardView);
+        //Reviews
+        ReviewItemList = new ArrayList<>();
+        reviewNumtextView = findViewById(R.id.reviewNumTextView);
+        reviewRecyclerView = findViewById(R.id.reviewRecyclerView);
+        reviewRecyclerView.setHasFixedSize(true);
+        reviewRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         //Get ID of Item Clicked to run search
         String documentID = userData.catItemClicked_Global;
@@ -259,6 +287,8 @@ public class CatListingView extends AppCompatActivity {
             Toast.makeText(CatListingView.this, "Oops! Looks like something went wrong getting item details.", Toast.LENGTH_SHORT).show();
 
         }
+
+
         //---Stock Increase Button---//
         increaseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -369,6 +399,95 @@ public class CatListingView extends AppCompatActivity {
                 }
             }
         });
+
+        //Dont let user type more than available stock
+        quantityEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (userData.itemStock_Global.equals("unlimited")){
+
+                }
+                else{
+                    //Not unlimited
+                    //Check Current Value is the same or less than the stock
+                    try {
+                        int quantityLimit = Integer.parseInt(userData.itemStock_Global);
+                        String strcurrentQuantity = quantityEditText.getText().toString().trim();
+                        int currentQuantity = Integer.parseInt(strcurrentQuantity);
+
+                        if (currentQuantity > quantityLimit) {
+                            quantityEditText.setText(userData.itemStock_Global);
+                        }
+                    }
+                    catch (Exception e){
+
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    @Override
+    protected void onStart(){
+        super.onStart();
+
+        //---Reset Edit Item Variable to False (New listing not an edit)---//
+        userData.listingEdit_Global = false;
+
+        //---Query to get items of current user---//
+        collectionReference.whereEqualTo("Item", userData.catItemClicked_Global)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            //Check if the query is not empty
+                            if (!task.getResult().isEmpty()) {
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+
+                                    //Get Document ID
+                                    String docID= document.getId();
+
+                                    ReviewItem reviewItem = document.toObject(ReviewItem.class).withId(docID);
+                                    ReviewItemList.add(reviewItem);
+
+                                    //Display how many items the user has for sale
+                                    reviewNumtextView.setText("Reviews (" + task.getResult().size() + ")");
+                                }
+
+                                //Invoke Recycler View
+                                reviewItemRecyclerAdapter = new ReviewItemRecyclerAdapter(getApplicationContext(), ReviewItemList);
+                                reviewRecyclerView.setAdapter(reviewItemRecyclerAdapter);
+                                reviewItemRecyclerAdapter.notifyDataSetChanged();
+
+                            }
+                            else {
+                                //No Reviews
+
+                            }
+
+                        } else {
+                            //Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+
+                    }
+
+                });
+
+
+
 
     }
 

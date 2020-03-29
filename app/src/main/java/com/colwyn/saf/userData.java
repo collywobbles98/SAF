@@ -61,7 +61,6 @@ public class userData {
     //Sales
     public static String SellingOrderClicked_Global;
 
-
     //Messaging
     public static String FSUser1FN;
     public static String FSUser1LN;
@@ -73,5 +72,8 @@ public class userData {
     public static String chatClicked_Global;
     public static String chatOtherUser_Global;
     public static String chatOtherUserID_Global;
+
+    //Reviews
+    public static String reviewStars_Global;
     
 }

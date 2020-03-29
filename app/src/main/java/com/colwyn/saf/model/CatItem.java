@@ -94,9 +94,7 @@ public class CatItem extends ItemDocID {
         Delivery_Notes = delivery_Notes;
     }
 
-    public String getUserID() {
-        return UserID;
-    }
+    public String getUserID() { return UserID; }
     public void setUserID(String userID) { UserID = userID; }
 
 }
