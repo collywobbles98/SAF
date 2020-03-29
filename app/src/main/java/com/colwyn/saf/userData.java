@@ -73,4 +73,5 @@ public class userData {
     public static String chatClicked_Global;
     public static String chatOtherUser_Global;
     public static String chatOtherUserID_Global;
+    
 }

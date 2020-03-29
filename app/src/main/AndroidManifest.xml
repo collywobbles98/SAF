@@ -9,10 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".displayhelp"></activity>
+        <activity android:name=".reviews"></activity>
+        <activity android:name=".displayhelp" />
         <activity
             android:name=".messages"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".chats"
             android:screenOrientation="portrait" />
@@ -97,6 +98,10 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="com.google.android.gms.wallet.api.enabled"
+            android:value="true" />
     </application>
 
 </manifest>

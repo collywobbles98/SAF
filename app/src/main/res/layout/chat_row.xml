@@ -11,6 +11,19 @@
         android:layout_height="match_parent"
         android:padding="10dp">
 
+        <TextView
+            android:id="@+id/textView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Hold To Remove"
+            android:textAlignment="textEnd"
+            android:textColor="#E70A0A"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <androidx.cardview.widget.CardView
             android:id="@+id/cardView15"
             android:layout_width="75dp"

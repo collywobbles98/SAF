@@ -104,9 +104,11 @@ public class messages extends AppCompatActivity {
                     messages.put("Reciever", userData.chatOtherUserID_Global);
                     messages.put("ChatID", userData.chatClicked_Global);
                     messages.put("Message", messageEditText.getText().toString().trim());
-                    SimpleDateFormat formatter= new SimpleDateFormat("HH:mm:ss 'at' yyyy-MM-dd");
-                    Date date = new Date(System.currentTimeMillis());
-                    messages.put("TimeStamp", date.toString().trim());
+
+                    //Timestamp
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                    String format = simpleDateFormat.format(new Date());
+                    messages.put("TimeStamp", format);
 
                     db.collection("messages")
                             .add(messages)

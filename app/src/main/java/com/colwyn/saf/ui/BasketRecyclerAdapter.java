@@ -101,7 +101,7 @@ public class BasketRecyclerAdapter extends RecyclerView.Adapter<BasketRecyclerAd
                         .addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context, "Item Cant be removed at this time.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Item Can't be removed at this time.", Toast.LENGTH_SHORT).show();
                             }
                         });
                 return false;
