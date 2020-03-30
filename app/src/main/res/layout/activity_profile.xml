@@ -116,7 +116,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tint="#0984E3"
-                        app:srcCompat="@drawable/ic_shop_two_black_24dp" />
+                        app:srcCompat="@drawable/ic_receipt_black_24dp" />
 
                     <TextView
                         android:id="@+id/textView46"
@@ -212,6 +212,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:layout_weight="1"
+                android:onClick="wantedSectionClicked"
                 app:cardBackgroundColor="#ffffff"
                 app:cardCornerRadius="8dp">
 
@@ -226,13 +227,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:tint="#0984E3"
-                        app:srcCompat="@drawable/ic_help_black_24dp" />
+                        app:srcCompat="@drawable/ic_visibility_black_24dp" />
 
                     <TextView
                         android:id="@+id/textView51"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Help"
+                        android:text="Wanted Section"
                         android:textAlignment="center"
                         android:textColor="#000000"
                         android:textSize="18sp"

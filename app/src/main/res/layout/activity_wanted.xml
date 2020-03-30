@@ -16,17 +16,39 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteX="0dp" />
 
+    <ImageView
+        android:id="@+id/imageView23"
+        android:layout_width="39dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:onClick="backClicked"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_back_24dp" />
+
+    <ImageView
+        android:id="@+id/imageView22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar21"
+        app:layout_constraintEnd_toEndOf="@+id/toolbar21"
+        app:layout_constraintTop_toTopOf="@+id/toolbar21"
+        app:srcCompat="@drawable/add_box_white" />
+
     <TextView
         android:id="@+id/textView61"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="10dp"
         android:text="Wanted Section"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#F6F7EB"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageView23"
+        app:layout_constraintTop_toTopOf="@+id/toolbar21" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

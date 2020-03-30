@@ -80,6 +80,10 @@ public class Profile extends AppCompatActivity {
         //Take user to edit details activity
         startActivity(new Intent(Profile.this, incomingorders.class));
     }
+    public void wantedSectionClicked (View view){
+        //Take user to wanted activity
+        startActivity(new Intent(Profile.this, wanted.class));
+    }
 
 
     @Override
