@@ -24,6 +24,8 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
 
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -37,7 +39,7 @@ public class confirmorder extends AppCompatActivity {
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     //---Declare Widgets---//
-    TextView orderTotalTextView, deliveryNameTextView, deliveryAddressTextView, cardTextView, listingToUpdateTextView;
+    TextView orderTotalTextView, deliveryNameTextView, deliveryAddressTextView, cardTextView, listingToUpdateTextView, paymentMethodTextView;
     Button buyNowButton;
 
     //---Buttons Clicked---//
@@ -61,10 +63,12 @@ public class confirmorder extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirmorder);
+
         //---Get Widgets---//
         orderTotalTextView = findViewById(R.id.orderTotalTextView);
         deliveryNameTextView = findViewById(R.id.deliveryNameTextView);
         deliveryAddressTextView = findViewById(R.id.deliveryAddressTextview);
+        paymentMethodTextView = findViewById(R.id.paymentMethodTextView);
         cardTextView = findViewById(R.id.cardTextView);
         buyNowButton = findViewById(R.id.buyNowButton);
         listingToUpdateTextView = findViewById(R.id.listingToUpdateTextView);
@@ -87,6 +91,9 @@ public class confirmorder extends AppCompatActivity {
         else{
             orderTotalTextView.setText("$" + strSubtotal + " " + userData.currency_Global);
         }
+        //PayPal Reference
+        paymentMethodTextView.setText(userData.paymentMethod_Global);
+        cardTextView.setText(userData.paypal_reference_Global);
 
         //---Get User Information from firestore---//
         String userID = user.getUid();
@@ -243,6 +250,35 @@ public class confirmorder extends AppCompatActivity {
             }
         });
 
+
+        //---PayPal---//
+        //Get Intent
+        Intent intent = getIntent();
+
+        try{
+            JSONObject jsonObject = new JSONObject(intent.getStringExtra("PaymentDetails"));
+            showPayPalDetails(jsonObject.getJSONObject("response"),intent.getStringExtra("PaymentAmount"));
+
+        }
+        catch(Exception e){
+
+        }
+
+
+    }
+
+    private void showPayPalDetails(JSONObject response, String paymentAmount){
+        try{
+            //Save Payment Details
+            userData.paypal_reference_Global = response.getString("id");
+            cardTextView.setText(userData.paypal_reference_Global);
+            //cardTextView.setText("PayPal REF: " + response.getString("id") + "\nStatus: " + response.getString("state"));
+
+        }
+        catch (Exception e){
+
+        }
+
     }
 
     private void placeOrder(){
@@ -257,14 +293,15 @@ public class confirmorder extends AppCompatActivity {
         orders.put("OrderTotal", userData.subtotal_Global.toString().trim());
         orders.put("Goods", userData.goods_Global);
         orders.put("CurrencyUsed", userData.currency_Global);
-        orders.put("CardNum1", userData.encryptednum1_Global);
-        orders.put("CardNum2", userData.encryptednum2_Global);
-        orders.put("CardNum3", userData.encryptednum3_Global);
-        orders.put("CardNum4", userData.encryptednum4_Global);
-        orders.put("CardholderName", userData.cardholdername_Global);
-        orders.put("ExpiryMonth", userData.encryptedmonth_Global);
-        orders.put("ExpiryYear", userData.encryptedyear_Global);
-        orders.put("CCV", userData.encryptedccv_Global);
+        //orders.put("CardNum1", userData.encryptednum1_Global);
+        //orders.put("CardNum2", userData.encryptednum2_Global);
+        //orders.put("CardNum3", userData.encryptednum3_Global);
+        //orders.put("CardNum4", userData.encryptednum4_Global);
+        //orders.put("CardholderName", userData.cardholdername_Global);
+        //orders.put("ExpiryMonth", userData.encryptedmonth_Global);
+        //orders.put("ExpiryYear", userData.encryptedyear_Global);
+        //orders.put("CCV", userData.encryptedccv_Global);
+        orders.put("PayPalREF", userData.paypal_reference_Global);
         orders.put("DeliveryName", deliveryNameTextView.getText().toString().trim());
         orders.put("DeliveryAddress", deliveryAddressTextView.getText().toString().trim());
         orders.put("TimeStamp", format);

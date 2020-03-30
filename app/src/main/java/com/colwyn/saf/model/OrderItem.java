@@ -7,19 +7,21 @@ public class OrderItem extends ItemDocID {
     private String OrderTotal;
     private String TimeStamp;
     private String PaymentMethod;
+    private String PayPalREF;
     private String Goods;
 
     //Empty Constructor for Firestore to Work
     public OrderItem() {
     }
 
-    public OrderItem(String userID, String currencyUsed, String orderTotal, String timeStamp, String paymentMethod, String goods) {
+    public OrderItem(String userID, String currencyUsed, String orderTotal, String timeStamp, String paymentMethod, String payPalREF, String goods) {
 
         UserID = userID;
         CurrencyUsed = currencyUsed;
         OrderTotal = orderTotal;
         TimeStamp = timeStamp;
         PaymentMethod = paymentMethod;
+        PayPalREF = payPalREF;
         Goods = goods;
     }
 
@@ -37,6 +39,9 @@ public class OrderItem extends ItemDocID {
 
     public String getPaymentMethod() { return PaymentMethod; }
     public void setPaymentMethod(String paymentMethod) { PaymentMethod = paymentMethod; }
+
+    public String getPayPalREF() { return PayPalREF; }
+    public void setPayPalREF(String payPalREF) { PayPalREF = payPalREF; }
 
     public String getGoods() { return Goods; }
     public void setGoods(String goods) { Goods = goods; }

@@ -57,7 +57,7 @@ public class CatListingView extends AppCompatActivity {
     ImageView catItemImageView, newImageView;
     Button addToBasketButton, increaseButton, decreaseButton;
     EditText quantityEditText;
-    CardView messageSellerCardView;
+    CardView messageSellerCardView, buyCardView;
 
     private List<ReviewItem> ReviewItemList;
     private RecyclerView reviewRecyclerView;
@@ -153,6 +153,7 @@ public class CatListingView extends AppCompatActivity {
         newImageView = findViewById(R.id.newImageView);
         catItemImageView = findViewById(R.id.catItemImageView);
 
+        buyCardView = findViewById(R.id.buyCardView);
         addToBasketButton = findViewById(R.id.addToBasketButton);
 
         quantityEditText = findViewById(R.id.quantityEditText);
@@ -256,6 +257,7 @@ public class CatListingView extends AppCompatActivity {
                                     stockTextView.setTextColor(Color.parseColor("#fc3d39"));
 
                                     //Can't Buy Item, Remove Add to basket Button
+                                    buyCardView.setVisibility(View.GONE);
                                     addToBasketButton.setVisibility(View.GONE);
                                     userData.itemStock_Global = null;
 

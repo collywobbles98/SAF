@@ -50,10 +50,20 @@ public class OrderItemRecyclerAdapter extends RecyclerView.Adapter<OrderItemRecy
         double paid = Double.parseDouble(orderItem.getOrderTotal());
         String strPaid = String.format("%.2f", paid);
 
-        //Display Data
-        viewHolder.details1.setText("Order Ref: " + OrderItemList.get(position).docID + "\nPlaced on: " + orderItem.getTimeStamp());
-        viewHolder.details2.setText("Paid: " + strPaid + " " +orderItem.getCurrencyUsed() + " with " + orderItem.getPaymentMethod());
-        viewHolder.details3.setText("\nItems:\n" +orderItem.getGoods());
+        String PayPalREF = "";
+        if (orderItem.getPaymentMethod().equals("paypal")){
+            viewHolder.details1.setText("Order Ref: " + OrderItemList.get(position).docID + "\nPlaced on: " + orderItem.getTimeStamp());
+            viewHolder.details2.setText("Paid: " + strPaid + " " +orderItem.getCurrencyUsed() + " with " + orderItem.getPaymentMethod() + "\n" + orderItem.getPayPalREF());
+            viewHolder.details3.setText("\nItems:\n" +orderItem.getGoods());
+        }
+        else{
+            //For Card Payments (Obsolete)
+            //Display Data
+            viewHolder.details1.setText("Order Ref: " + OrderItemList.get(position).docID + "\nPlaced on: " + orderItem.getTimeStamp());
+            viewHolder.details2.setText("Paid: " + strPaid + " " +orderItem.getCurrencyUsed() + " with " + orderItem.getPaymentMethod());
+            viewHolder.details3.setText("\nItems:\n" +orderItem.getGoods());
+        }
+
 
         //Get Document ID onclick
         final String documentID = OrderItemList.get(position).docID;

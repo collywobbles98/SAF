@@ -33,7 +33,7 @@ public class userData {
     public static String goods_Global;
 
     //Payment method
-    public static String paymentMethod_Global = "card";
+    public static String paymentMethod_Global;
 
     //Payment Details
     public static String cardtype_Global;
@@ -45,6 +45,9 @@ public class userData {
     public static String encryptedmonth_Global;
     public static String encryptedyear_Global;
     public static String encryptedccv_Global;
+
+    //PayPal
+    public static String paypal_reference_Global;
 
     //Stock Control
     public static String listingToUpdate_Global;

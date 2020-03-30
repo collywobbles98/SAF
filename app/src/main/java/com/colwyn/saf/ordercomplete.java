@@ -34,7 +34,7 @@ public class ordercomplete extends AppCompatActivity {
         orderTextView = findViewById(R.id.orderTextView);
 
         //---Display Data---//
-        orderTextView.setText("Order Reference:\n\n" + userData.orderRef_Global);
+        orderTextView.setText("SAF Order Reference:\n\n" + userData.orderRef_Global);
 
     }
 }

@@ -69,7 +69,7 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="#0984E3"
-                android:text="BUY NOW"
+                android:text="CONFIRM"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold" />
 
@@ -94,7 +94,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="10dp"
                             android:layout_marginTop="5dp"
-                            android:text="Order Total:"
+                            android:text="Amount Paid:"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,7 +115,9 @@
                             android:layout_marginLeft="5dp"
                             android:layout_marginTop="5dp"
                             android:layout_marginRight="5dp"
+                            android:layout_marginBottom="25dp"
                             android:background="#000000"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintBottom_toTopOf="@+id/editBasketButton"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -133,6 +135,7 @@
                             android:textAlignment="textEnd"
                             android:textColor="#FF5A5F"
                             android:textStyle="bold"
+                            android:visibility="gone"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -250,7 +253,7 @@
                         android:background="#000000"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/cardTextView" />
+                        app:layout_constraintTop_toBottomOf="@id/paymentMethodTextView" />
 
                     <Button
                         android:id="@+id/changeCardButton"
@@ -263,22 +266,37 @@
                         android:textAlignment="textEnd"
                         android:textColor="#FF5A5F"
                         android:textStyle="bold"
+                        android:visibility="gone"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
                     <TextView
-                        android:id="@+id/cardTextView"
+                        android:id="@+id/paymentMethodTextView"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginEnd="10dp"
-                        android:text="Card Details"
+                        android:text="PaymentMethod"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/cardTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:text="PayPalReference"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/divider3" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
             </androidx.cardview.widget.CardView>
