@@ -72,6 +72,7 @@ public class UserItemRecyclerAdapter extends RecyclerView.Adapter<UserItemRecycl
                 userData.userItemClicked_Global = documentID;
 
                 //Move to listing view Acivity
+                UserItemList.clear();
                 Intent intent = new Intent(context, listingView.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);

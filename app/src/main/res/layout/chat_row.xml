@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Hold To Remove"
+            android:text="Hold To Delete Chat"
             android:textAlignment="textEnd"
             android:textColor="#E70A0A"
             android:textSize="12sp"

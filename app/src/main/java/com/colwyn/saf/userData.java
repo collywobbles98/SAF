@@ -78,5 +78,9 @@ public class userData {
 
     //Reviews
     public static String reviewStars_Global;
+
+    //Wanted Section
+    public static String WantedAdClicked_Global;
+    public static String wantedPosterID_Global;
     
 }

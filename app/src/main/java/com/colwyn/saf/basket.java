@@ -78,6 +78,7 @@ public class basket extends AppCompatActivity {
             Toast.makeText(basket.this, "Please Add something to your basket.", Toast.LENGTH_SHORT).show();
         }
         else{
+            BasketItemList.clear();
             startActivity(new Intent(basket.this, paymentOptions.class));
         }
     }
