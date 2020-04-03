@@ -66,44 +66,6 @@ public class LogIn extends AppCompatActivity {
     public void sendEmailClicked(View view){
 
 
-        sendEmailButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                //Get Values
-                String email = txtEmail.getText().toString().trim();
-
-                //Check Form has been Filled in
-                if (TextUtils.isEmpty(email)) {
-                    //No Email Entered (Display Error Message)
-                    Toast.makeText(LogIn.this, "Please enter an email address.", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                else if (!TextUtils.isEmpty(email)) {
-                    //Email Entered
-                    auth.sendPasswordResetEmail(email)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Toast.makeText(LogIn.this, "Email Sent", Toast.LENGTH_SHORT).show();
-                                        recreate();
-                                        return;
-
-                                    }
-
-                                    else{
-                                        Toast.makeText(LogIn.this, "An Error has occured. Please Check your Email.", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-                }
-
-
-            }
-        });
-
-
     }
 
     //---Cancel Send Email---//
@@ -125,6 +87,8 @@ public class LogIn extends AppCompatActivity {
         txtEmail = findViewById(R.id.txtEmail);
         txtPassword = findViewById(R.id.txtPassword);
         btnLogIn = findViewById(R.id.btnLogIn);
+        sendEmailButton = findViewById(R.id.sendEmailButton);
+
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -200,6 +164,44 @@ public class LogIn extends AppCompatActivity {
             startActivity(new Intent(LogIn.this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
 
         }
+
+        sendEmailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Get Values
+                String email = txtEmail.getText().toString().trim();
+
+                //Check Form has been Filled in
+                if (TextUtils.isEmpty(email)) {
+                    //No Email Entered (Display Error Message)
+                    Toast.makeText(LogIn.this, "Please enter an email address.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                else if (!TextUtils.isEmpty(email)) {
+                    //Email Entered
+                    auth.sendPasswordResetEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(LogIn.this, "Email Sent", Toast.LENGTH_SHORT).show();
+                                        finish();
+                                        startActivity(getIntent().addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION));
+                                        return;
+
+                                    }
+
+                                    else{
+                                        Toast.makeText(LogIn.this, "An Error has occured. Please Check your Email.", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                }
+
+
+            }
+        });
 
 
     }
