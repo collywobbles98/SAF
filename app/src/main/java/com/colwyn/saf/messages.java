@@ -27,6 +27,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
@@ -104,6 +105,7 @@ public class messages extends AppCompatActivity {
                     messages.put("Reciever", userData.chatOtherUserID_Global);
                     messages.put("ChatID", userData.chatClicked_Global);
                     messages.put("Message", messageEditText.getText().toString().trim());
+                    messages.put("ServerTimeStamp", FieldValue.serverTimestamp());
 
                     //Timestamp
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -117,9 +119,15 @@ public class messages extends AppCompatActivity {
                                 public void onSuccess(DocumentReference documentReference) {
                                     //Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                                     //Save Last Chat Message
+
+                                    //Timestamp
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+                                    String format = simpleDateFormat.format(new Date());
+
                                     DocumentReference currencyRef = db.collection("chats").document(userData.chatClicked_Global);
                                     currencyRef
-                                            .update("LastMessage", messageEditText.getText().toString().trim())
+                                            .update("LastMessage", messageEditText.getText().toString().trim(), "ServerTimeStamp",FieldValue.serverTimestamp())
+
                                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
@@ -187,7 +195,7 @@ public class messages extends AppCompatActivity {
 
     private void getMessages(){
         //---Query to get items of current user---//
-        collectionReference.orderBy("TimeStamp", Query.Direction.ASCENDING).whereEqualTo("ChatID", userData.chatClicked_Global)
+        collectionReference.orderBy("ServerTimeStamp", Query.Direction.ASCENDING).whereEqualTo("ChatID", userData.chatClicked_Global)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

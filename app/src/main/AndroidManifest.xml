@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WantedAdView"></activity>
+        <activity android:name=".Tutorial2"></activity>
+        <activity android:name=".WantedAdView" />
         <activity android:name=".addWanted" />
         <activity android:name=".wanted" />
         <activity android:name=".addReview" />

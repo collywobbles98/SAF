@@ -142,7 +142,8 @@
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp">
+                    android:layout_marginTop="15dp"
+                    app:contentPaddingBottom="50dp">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -234,18 +235,29 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:layout_editor_absoluteX="0dp" />
 
+        <ImageView
+            android:id="@+id/imageView27"
+            android:layout_width="39dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:onClick="backClicked"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back_24dp" />
+
         <TextView
             android:id="@+id/TextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="10dp"
             android:text="Your Ad"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="#F6F7EB"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageView27"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
@@ -271,14 +283,5 @@
         android:layout_margin="@dimen/fab_margin"
         app:backgroundTint="#FF5A5F"
         app:srcCompat="@drawable/ic_create_black_24dp" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/cancelButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|start"
-        android:layout_margin="@dimen/fab_margin"
-        app:backgroundTint="#FF5A5F"
-        app:srcCompat="@drawable/ic_cancel_black_24dp" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

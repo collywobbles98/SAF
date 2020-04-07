@@ -96,7 +96,7 @@ public class Register extends AppCompatActivity {
                                         //Log.d(TAG, "createUserWithEmail:success");
                                         //FirebaseUser user = mAuth.getCurrentUser();
                                         //updateUI(user);
-                                        Toast.makeText(Register.this, "Registration Complete..",
+                                        Toast.makeText(Register.this, "Registration Complete.",
                                                 Toast.LENGTH_SHORT).show();
                                         //Go to Main Activity
                                         startActivity(new Intent(Register.this, Tutorial1.class));

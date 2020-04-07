@@ -82,5 +82,8 @@ public class userData {
     //Wanted Section
     public static String WantedAdClicked_Global;
     public static String wantedPosterID_Global;
+
+    //Tutorial Section
+    public static Integer tutorialCounter_Global;
     
 }

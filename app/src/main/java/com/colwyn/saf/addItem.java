@@ -23,6 +23,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
@@ -670,6 +671,7 @@ public class addItem extends AppCompatActivity {
             listings.put("Delivery_Notes", deliverynotes);
             listings.put("ImageURL", downloadurl);
             listings.put("TimeStamp", format);
+            listings.put("ServerTimeStamp",FieldValue.serverTimestamp());
             listings.put("Stock", stock);
 
 
@@ -710,6 +712,7 @@ public class addItem extends AppCompatActivity {
             listings.put("Price", price);
             listings.put("Delivery_Notes", deliverynotes);
             listings.put("TimeStamp", format);
+            listings.put("ServerTimeStamp",FieldValue.serverTimestamp());
             listings.put("Stock", stock);
 
             if(downloadurl != null) {

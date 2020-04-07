@@ -115,9 +115,9 @@ public class chats extends AppCompatActivity {
         ChatItemList.clear();
 
         //Task 1 (If user is user1)
-        Task task1 = collectionReference.whereEqualTo("User1", user.getUid()).orderBy("TimeStamp", Query.Direction.DESCENDING).get();
+        Task task1 = collectionReference.whereEqualTo("User1", user.getUid()).orderBy("ServerTimeStamp", Query.Direction.DESCENDING).get();
         //Task 2 (If user is user2)
-        Task task2 = collectionReference.whereEqualTo("User2", user.getUid()).orderBy("TimeStamp", Query.Direction.DESCENDING).get();
+        Task task2 = collectionReference.whereEqualTo("User2", user.getUid()).orderBy("ServerTimeStamp", Query.Direction.DESCENDING).get();
 
         Task<List<QuerySnapshot>> allTasks = Tasks.whenAllSuccess(task1, task2);
         allTasks.addOnSuccessListener(new OnSuccessListener<List<QuerySnapshot>>() {

@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -64,6 +65,7 @@ public class addReview extends AppCompatActivity {
                             String FSUserEmail = document.getString("Email");
                             String FSFirstname = document.getString("First Name");
                             String FSLastname = document.getString("Last Name");
+
 
                             //---Save to global variable---//
                             userData.email_Global = FSUserEmail;
@@ -187,6 +189,7 @@ public class addReview extends AppCompatActivity {
             reviews.put("Title", reviewTitleEditText.getText().toString().trim());
             reviews.put("Description", reviewDescriptionEditText.getText().toString().trim());
             reviews.put("Stars", userData.reviewStars_Global);
+            reviews.put("ServerTimeStamp", FieldValue.serverTimestamp());
 
             // Add a new document with a generated ID
             db.collection("reviews")

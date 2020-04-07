@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.StorageReference;
@@ -98,7 +99,7 @@ public class Selling extends AppCompatActivity {
         userData.listingEdit_Global = false;
 
         //---Query to get items of current user---//
-        collectionReference.whereEqualTo("UserID", userIDFB)
+        collectionReference.whereEqualTo("UserID", user.getUid()).orderBy("ServerTimeStamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

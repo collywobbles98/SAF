@@ -139,7 +139,7 @@ public class LogIn extends AppCompatActivity {
                                         //updateUI(user);
                                         //Go to Main Activity
                                         startActivity(new Intent(LogIn.this, MainActivity.class));
-                                        Toast.makeText(LogIn.this, "Welcome.",
+                                        Toast.makeText(LogIn.this, "Welcome Back.",
                                                 Toast.LENGTH_SHORT).show();
                                     } else {
                                         // If sign in fails, display a message to the user.

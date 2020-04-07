@@ -41,6 +41,11 @@ public class listingView extends AppCompatActivity {
     TextView titleTextView, priceTextView, deliveryTextView, conditionTextView, brandTextView, descriptionTextView, postedTextView, stockTextView;
     ImageView itemImageView, newImageView;
 
+    //---Back Button---//
+    public void backClicked(View view){
+        startActivity(new Intent(listingView.this, Selling.class));
+    }
+
     //---Delete DialogBox---//
     private AlertDialog AskOption()
     {
@@ -259,16 +264,6 @@ public class listingView extends AppCompatActivity {
                 //Start addItem Activity
                 startActivity(new Intent(listingView.this, addItem.class));
 
-            }
-        });
-
-        //---Cancel Button---//
-        FloatingActionButton cancelButton = findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //.Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
-                startActivity(new Intent(listingView.this, Selling.class));
             }
         });
 

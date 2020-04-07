@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -80,6 +81,7 @@ public class addWanted extends AppCompatActivity {
             wanted.put("Title", wantedTitleEditText.getText().toString().trim());
             wanted.put("Description", wantedDescriptionEditText.getText().toString().trim());
             wanted.put("TimeStamp", format);
+            wanted.put("ServerTimeStamp", FieldValue.serverTimestamp());
 
             db.collection("wanted_ads")
                     .add(wanted)

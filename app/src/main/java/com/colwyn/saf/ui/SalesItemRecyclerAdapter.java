@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -59,7 +58,7 @@ public class SalesItemRecyclerAdapter extends RecyclerView.Adapter<SalesItemRecy
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, documentID, Toast.LENGTH_SHORT).show();
 
                 //Store Document ID in Global Variable
                 userData.SellingOrderClicked_Global = documentID;

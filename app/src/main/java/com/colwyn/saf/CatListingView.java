@@ -30,6 +30,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.squareup.picasso.Picasso;
@@ -448,8 +449,8 @@ public class CatListingView extends AppCompatActivity {
         //---Reset Edit Item Variable to False (New listing not an edit)---//
         userData.listingEdit_Global = false;
 
-        //---Query to get items of current user---//
-        collectionReference.whereEqualTo("Item", userData.catItemClicked_Global)
+        //---Query to get Reviews---//
+        collectionReference.whereEqualTo("Item", userData.catItemClicked_Global).orderBy("ServerTimeStamp", Query.Direction.DESCENDING)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override

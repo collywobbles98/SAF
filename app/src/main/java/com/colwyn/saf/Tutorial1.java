@@ -41,7 +41,7 @@ public class Tutorial1 extends AppCompatActivity {
         Map<String, Object> user = new HashMap<>();
         user.put("userID", userID);
         user.put("Email", email);
-        user.put("Currency", "GBP");//Default Currency
+        user.put("Currency", "(GBP)");//Default Currency
 
         db.collection("user").document(userID)
                 .set(user)//, SetOptions.merge())
@@ -50,7 +50,7 @@ public class Tutorial1 extends AppCompatActivity {
                     public void onSuccess(Void aVoid) {
                         //Log.d(TAG, "DocumentSnapshot successfully written!");
 
-                        startActivity(new Intent(Tutorial1.this, accountDetails.class));
+                        startActivity(new Intent(Tutorial1.this, Tutorial2.class));
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {

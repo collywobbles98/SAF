@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (userData.categories_Global.equals("all")){
             //---Query to get all items---//
-            collectionReference.orderBy("TimeStamp", Query.Direction.ASCENDING)
+            collectionReference.orderBy("ServerTimeStamp", Query.Direction.DESCENDING)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
