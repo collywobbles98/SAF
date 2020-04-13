@@ -113,10 +113,19 @@ public class confirmorder extends AppCompatActivity {
                             String FSCountyState = document.getString("County_State");
                             String FSCountry = document.getString("Country");
 
-                            //---Display in edit texts ---//
-                            deliveryNameTextView.setText(FSFirstname + " " + FSLastname);
-                            deliveryAddressTextView.setText(FSAddress + " " + FSPostcodeZip + " " + FSCountyState + " " + FSCountry);
-
+                            //---Display in text Views ---//
+                            if (FSFirstname.equals("") || FSLastname.equals("")){
+                                deliveryNameTextView.setText("Please Enter a full delivery name.");
+                            }
+                            else {
+                                deliveryNameTextView.setText(FSFirstname + " " + FSLastname);
+                            }
+                            if (FSAddress.equals("") || FSPostcodeZip.equals("") || FSCountyState.equals("") || FSCountry.equals("")){
+                                deliveryAddressTextView.setText("Please Enter a full delivery address.");
+                            }
+                            else {
+                                deliveryAddressTextView.setText(FSAddress + " " + FSPostcodeZip + " " + FSCountyState + " " + FSCountry);
+                            }
 
                         } else {
                             //An error has occured
@@ -152,6 +161,12 @@ public class confirmorder extends AppCompatActivity {
         buyNowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (deliveryNameTextView.getText().toString().trim().equals("Please Enter a full delivery name.")) {
+                    Toast.makeText(confirmorder.this, "You need to add a name to your delivery address.", Toast.LENGTH_SHORT).show();
+                } else if (deliveryAddressTextView.getText().toString().trim().equals("Please Enter a full delivery address.")) {
+                    Toast.makeText(confirmorder.this, "You need to add a name to your delivery address.", Toast.LENGTH_SHORT).show();
+                } else {
+
                 //---Place Order---//
                 //Get Item details from users basket
                 String userID = user.getUid();
@@ -186,17 +201,16 @@ public class confirmorder extends AppCompatActivity {
                                                         //---Retrieve data and store as string---//
                                                         String FSCurrentStock = document.getString("Stock");
                                                         //Toast.makeText(confirmorder.this, FSCurrentStock, Toast.LENGTH_SHORT).show();
-                                                        if (FSCurrentStock.equals("unlimited")){
+                                                        if (FSCurrentStock.equals("unlimited")) {
                                                             //No need for stock reduction
-                                                        }
-                                                        else{
+                                                        } else {
                                                             //Reduce Stock
                                                             Integer currentStockInt = Integer.parseInt(FSCurrentStock);
                                                             Integer quantitySoldInt = Integer.parseInt(FSquantity);
                                                             Integer newStockInt = currentStockInt - quantitySoldInt;
                                                             String newStock = newStockInt.toString().trim();
 
-                                                            Toast.makeText(confirmorder.this, document.getId() + " Stock: " + FSCurrentStock + " Minus: " + FSquantity + " Equals: " + newStock, Toast.LENGTH_SHORT).show();
+                                                            //Toast.makeText(confirmorder.this, document.getId() + " Stock: " + FSCurrentStock + " Minus: " + FSquantity + " Equals: " + newStock, Toast.LENGTH_SHORT).show();
 
                                                             //Update Stock
                                                             DocumentReference stockRef = db.collection("listings").document(FSitemID);
@@ -229,7 +243,7 @@ public class confirmorder extends AppCompatActivity {
                                             }
                                         });
                                         //Increase Iteration for item number
-                                        itemnum ++;
+                                        itemnum++;
                                         //Save this to string
                                         goods += "(" + itemnum + ") " + "Item ID: " + FSitemID + " Title: " + FStitle + " Price: " + FSprice + " Currency: " + FScurrency + " Quantity: " + FSquantity + " Delivery Notes: " + FSdelivery + "\n\n";
                                         userData.goods_Global = goods;
@@ -246,8 +260,8 @@ public class confirmorder extends AppCompatActivity {
                         });
 
 
-
             }
+        }
         });
 
 
